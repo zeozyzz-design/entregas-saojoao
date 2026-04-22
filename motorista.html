@@ -225,18 +225,22 @@ select option{background:#1a1a1a}
       <div class="sec">Detalhes do Pagamento</div>
 
       <div class="fld">
-        <label>Tipo de Pagamento <span class="req">*</span></label>
+        <label>Tipo de Pagamento <span class="req">*</span> <span style="font-size:10px;color:var(--txt2);font-weight:400;text-transform:none;letter-spacing:0">(pode marcar mais de um)</span></label>
         <div class="tp">
-          <div class="tp-c"><input type="radio" name="tipo" id="t-d" value="Dinheiro">
+          <div class="tp-c"><input type="checkbox" name="tipo" id="t-d" value="Dinheiro">
             <label for="t-d"><span class="ic">💵</span>Dinheiro</label></div>
-          <div class="tp-c"><input type="radio" name="tipo" id="t-c" value="Cheque">
+          <div class="tp-c"><input type="checkbox" name="tipo" id="t-pix" value="PIX">
+            <label for="t-pix"><span class="ic">⚡</span>PIX</label></div>
+          <div class="tp-c"><input type="checkbox" name="tipo" id="t-c" value="Cheque">
             <label for="t-c"><span class="ic">📄</span>Cheque</label></div>
-          <div class="tp-c"><input type="radio" name="tipo" id="t-db" value="Cartão Débito">
+          <div class="tp-c"><input type="checkbox" name="tipo" id="t-db" value="Cartão Débito">
             <label for="t-db"><span class="ic">💳</span>Cartão Débito</label></div>
-          <div class="tp-c"><input type="radio" name="tipo" id="t-cr" value="Cartão Crédito">
+          <div class="tp-c"><input type="checkbox" name="tipo" id="t-cr" value="Cartão Crédito">
             <label for="t-cr"><span class="ic">💳</span>Cartão Crédito</label></div>
+          <div class="tp-c"><input type="checkbox" name="tipo" id="t-bo" value="Boleto">
+            <label for="t-bo"><span class="ic">🏦</span>Boleto</label></div>
         </div>
-        <div class="errmsg" id="em-tipo">Selecione o tipo de pagamento</div>
+        <div class="errmsg" id="em-tipo">Selecione ao menos um tipo de pagamento</div>
       </div>
 
       <div class="fld">
@@ -363,9 +367,9 @@ function validate(){
   if(!pg){ document.getElementById('em-pgto').classList.add('on'); ok=false; }
 
   if(pg&&pg.value==='Sim'){
-    const tp=document.querySelector('input[name="tipo"]:checked');
-    document.getElementById('em-tipo').classList.toggle('on',!tp);
-    if(!tp)ok=false;
+    const tps=[...document.querySelectorAll('input[name="tipo"]:checked')];
+    document.getElementById('em-tipo').classList.toggle('on',tps.length===0);
+    if(tps.length===0)ok=false;
     const rec=document.getElementById('i-rec');
     const rv=rec.value.trim();
     rec.classList.toggle('inv',!rv);
@@ -402,7 +406,7 @@ document.getElementById('form').addEventListener('submit',async function(e){
   const pg=document.querySelector('input[name="pgto"]:checked').value;
   const nfv=parseFloat(document.getElementById('i-nfv').value)||0;
   const rcv=parseFloat(document.getElementById('i-rec').value)||0;
-  const tipo=document.querySelector('input[name="tipo"]:checked')?.value||'';
+  const tipo=[...document.querySelectorAll('input[name="tipo"]:checked')].map(x=>x.value).join(', ');
   const oco=document.getElementById('i-oco').value.trim();
 
   let status='Normal';
