@@ -58,6 +58,14 @@ body{background:var(--bg);color:var(--txt);font-family:'Roboto',sans-serif;min-h
   cursor:pointer;text-decoration:underline}
 .link2{font-size:12px;color:var(--txt2);text-align:center;margin-top:12px;cursor:pointer}
 .link2:hover{color:var(--txt)}
+.card select{width:100%;background:var(--bg);border:1.5px solid var(--bdr);
+  border-radius:var(--r);color:var(--txt);font-family:'Roboto',sans-serif;
+  font-size:15px;padding:13px 14px;outline:none;transition:border-color .2s;
+  -webkit-appearance:none;appearance:none;cursor:pointer;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 14px center;padding-right:38px}
+.card select:focus{border-color:var(--ora)}
+.card select option{background:#1a1a1a}
 
 /* strength */
 .str-bar{height:4px;background:var(--bdr);border-radius:2px;margin-top:6px;overflow:hidden}
@@ -226,8 +234,10 @@ tbody td{padding:11px 14px;vertical-align:middle;white-space:nowrap}
     <div class="sub">Acesso restrito — Gerencial</div>
     <div class="fld">
       <label>Usuário</label>
-      <input type="text" id="lu" placeholder="Gerencial" autocomplete="username"
-        onkeydown="if(event.key==='Enter')document.getElementById('lp').focus()">
+      <select id="lu" onchange="document.getElementById('lp').focus()">
+        <option value="">Selecione o usuário</option>
+        <option value="Gerencial">Gerencial</option>
+      </select>
     </div>
     <div class="fld">
       <label>Senha</label>
@@ -248,7 +258,10 @@ tbody td{padding:11px 14px;vertical-align:middle;white-space:nowrap}
     <div class="sub">Confirme sua identidade para prosseguir</div>
     <div class="fld">
       <label>Usuário</label>
-      <input type="text" id="cu" placeholder="Gerencial">
+      <select id="cu">
+        <option value="">Selecione o usuário</option>
+        <option value="Gerencial">Gerencial</option>
+      </select>
     </div>
     <div class="fld">
       <label>Senha atual</label>
@@ -371,7 +384,7 @@ tbody td{padding:11px 14px;vertical-align:middle;white-space:nowrap}
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz6Ak0kA5h6a1EzgZc-h9MUc75uYPPSnyfll8RM6X31f4SJ2HIbfU1z8prIbDtqex1Rfw/exec';
 // ══════════════════════════════════════════════════════════
 
-const DEFAULT_PASS = 'SaoJoao@2024';
+const DEFAULT_PASS = '1234';
 
 function getPass(){ return localStorage.getItem('sj_pass') || DEFAULT_PASS; }
 function setPass(p){ localStorage.setItem('sj_pass', p); }
@@ -386,7 +399,7 @@ function goTo(id){
 
 // ─ LOGIN ─────────────────────────────────────────────────
 function doLogin(){
-  const u = document.getElementById('lu').value.trim();
+  const u = document.getElementById('lu').value;
   const p = document.getElementById('lp').value;
 
   if(u === 'Gerencial' && p === getPass()){
@@ -400,11 +413,9 @@ function doLogin(){
     }
     loadData();
   } else {
-    document.getElementById('lu').classList.add('inv');
     document.getElementById('lp').classList.add('inv');
     document.getElementById('lerr').classList.add('show');
     setTimeout(()=>{
-      document.getElementById('lu').classList.remove('inv');
       document.getElementById('lp').classList.remove('inv');
     }, 2000);
   }
