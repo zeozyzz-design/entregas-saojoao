@@ -250,7 +250,50 @@ tbody td{padding:11px 14px;vertical-align:middle;white-space:nowrap}
   .topbar-info h1{font-size:12px}
   .pane{padding:12px}
   .notif-drawer{width:100%;max-width:100vw}
+  .cad-cols{grid-template-columns:1fr!important}
 }
+
+/* ─ CADASTROS ─ */
+.cad-cols{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.cad-card{background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r);overflow:hidden}
+.cad-head{padding:14px 18px;border-bottom:1px solid var(--bdr);display:flex;align-items:center;gap:10px}
+.cad-head h4{font-family:'Roboto Condensed',sans-serif;font-size:15px;font-weight:700;flex:1}
+.cad-count{background:var(--ora2);color:var(--ora);border:1px solid rgba(232,98,26,.3);
+  font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px;font-family:'Roboto Condensed',sans-serif}
+.cad-form{padding:14px 18px;border-bottom:1px solid var(--bdr);display:flex;gap:8px;align-items:flex-end}
+.cad-input{flex:1;background:var(--bg);border:1.5px solid var(--bdr);border-radius:8px;
+  color:var(--txt);font-family:'Roboto',sans-serif;font-size:14px;padding:10px 12px;
+  outline:none;transition:border-color .2s;-webkit-appearance:none}
+.cad-input:focus{border-color:var(--ora)}
+.cad-input.inv{border-color:var(--err)!important}
+.cad-add{padding:10px 16px;background:var(--ora);color:#fff;border:none;border-radius:8px;
+  font-family:'Roboto Condensed',sans-serif;font-size:13px;font-weight:700;
+  letter-spacing:.5px;text-transform:uppercase;cursor:pointer;white-space:nowrap;transition:opacity .2s}
+.cad-add:active{opacity:.8}
+.cad-errmsg{font-size:11px;color:var(--err);padding:4px 18px 0;display:none}
+.cad-errmsg.on{display:block}
+.cad-list{max-height:360px;overflow-y:auto}
+.cad-item{display:flex;align-items:center;padding:11px 18px;border-bottom:1px solid var(--bdr);
+  gap:10px;transition:background .15s}
+.cad-item:last-child{border-bottom:none}
+.cad-item:hover{background:rgba(255,255,255,.03)}
+.cad-ico{font-size:18px;flex-shrink:0}
+.cad-name{flex:1;font-size:14px;font-weight:500}
+.cad-meta{font-size:11px;color:var(--txt2);margin-top:1px}
+.cad-del{background:transparent;border:1px solid transparent;border-radius:6px;
+  color:var(--txt2);font-size:14px;cursor:pointer;padding:5px 7px;transition:all .2s;
+  line-height:1;flex-shrink:0}
+.cad-del:hover{border-color:rgba(224,85,85,.4);color:var(--err);background:rgba(224,85,85,.08)}
+.cad-empty{text-align:center;padding:32px 20px;color:var(--txt2);font-size:13px}
+.cad-sync{display:flex;align-items:center;gap:8px;padding:10px 18px;font-size:11px;color:var(--txt2);
+  border-top:1px solid var(--bdr);background:rgba(255,255,255,.02)}
+.cad-sync-dot{width:6px;height:6px;border-radius:50%;background:var(--txt2);flex-shrink:0}
+.cad-sync-dot.ok{background:var(--ok)}
+.cad-sync-dot.err{background:var(--err)}
+.cad-sync-dot.loading{background:var(--warn);animation:blink 1s infinite}
+.cad-saving{display:none;position:absolute;top:0;left:0;right:0;bottom:0;
+  background:rgba(26,26,26,.7);align-items:center;justify-content:center;border-radius:var(--r)}
+.cad-saving.on{display:flex}
 </style>
 </head>
 <body>
@@ -354,6 +397,7 @@ tbody td{padding:11px 14px;vertical-align:middle;white-space:nowrap}
   <div class="tabs">
     <div class="tab on"  onclick="showPane('dash',this)">📊 Dashboard</div>
     <div class="tab"     onclick="showPane('list',this)">📦 Entregas</div>
+    <div class="tab"     onclick="showPane('cad',this);loadCadastros()">👥 Cadastros</div>
     <div class="tab"     onclick="showPane('cfg',this)">⚙️ Configurações</div>
   </div>
 
@@ -463,6 +507,64 @@ tbody td{padding:11px 14px;vertical-align:middle;white-space:nowrap}
         <button class="cfg-save" onclick="testarWA()" style="width:auto">Enviar mensagem de teste</button>
         <div class="cfg-status" id="cfg-test-status" style="display:block;margin-top:0;align-self:center"></div>
       </div>
+    </div>
+  </div>
+
+  <!-- ── CADASTROS ── -->
+  <div class="pane" id="pane-cad">
+
+    <div class="sec">Gerenciar Motoristas e Veículos</div>
+
+    <div style="background:rgba(74,144,217,.08);border:1px solid rgba(74,144,217,.2);border-radius:var(--r);padding:12px 16px;margin-bottom:20px;font-size:13px;color:#8ab4d9;line-height:1.6">
+      <strong style="color:var(--info)">ℹ️ Sincronização automática</strong><br>
+      Os cadastros são salvos localmente <em>e</em> sincronizados com a planilha Google Sheets.
+      O formulário dos motoristas usa sempre a lista atualizada aqui.
+    </div>
+
+    <div class="cad-cols">
+
+      <!-- MOTORISTAS -->
+      <div class="cad-card">
+        <div class="cad-head">
+          <span class="cad-ico">🧑‍✈️</span>
+          <h4>Motoristas</h4>
+          <span class="cad-count" id="mot-count">0</span>
+        </div>
+        <div class="cad-form">
+          <input class="cad-input" id="new-mot" placeholder="Nome completo do motorista"
+            maxlength="60" onkeydown="if(event.key==='Enter')addMotorista()">
+          <button class="cad-add" onclick="addMotorista()">+ Adicionar</button>
+        </div>
+        <div class="cad-errmsg" id="err-mot">Informe o nome do motorista</div>
+        <div class="cad-list" id="mot-list"></div>
+        <div class="cad-sync">
+          <div class="cad-sync-dot" id="mot-sync-dot"></div>
+          <span id="mot-sync-lbl">Aguardando...</span>
+        </div>
+      </div>
+
+      <!-- VEÍCULOS -->
+      <div class="cad-card">
+        <div class="cad-head">
+          <span class="cad-ico">🚛</span>
+          <h4>Veículos / Placas</h4>
+          <span class="cad-count" id="plc-count">0</span>
+        </div>
+        <div class="cad-form">
+          <input class="cad-input" id="new-plc" placeholder="Ex: ABC-1234"
+            maxlength="10" style="text-transform:uppercase"
+            oninput="this.value=this.value.toUpperCase()"
+            onkeydown="if(event.key==='Enter')addPlaca()">
+          <button class="cad-add" onclick="addPlaca()">+ Adicionar</button>
+        </div>
+        <div class="cad-errmsg" id="err-plc">Informe a placa do veículo</div>
+        <div class="cad-list" id="plc-list"></div>
+        <div class="cad-sync">
+          <div class="cad-sync-dot" id="plc-sync-dot"></div>
+          <span id="plc-sync-lbl">Aguardando...</span>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -822,6 +924,8 @@ function showPane(id,el){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
   document.getElementById('pane-'+id).classList.add('on');
   el.classList.add('on');
+  // Atualiza filtro de motoristas ao abrir aba Entregas
+  if(id==='list') syncFiltroMotoristas();
 }
 
 // ─ DADOS ──────────────────────────────────────────────────
@@ -858,7 +962,7 @@ function renderDash(d){
   document.getElementById('k-dif').textContent=fmt(Math.abs(fat-rec));
   document.getElementById('k-div').textContent=ndiv;
   document.getElementById('k-oco').textContent=noco;
-  const mots=['Rogério','Roni','Alexander','Rafael','Jefferson'];
+  const mots = motoristas.length ? motoristas : ['Rogério','Roni','Alexander','Rafael','Jefferson'];
   document.getElementById('otbody').innerHTML=mots.map(m=>{
     const rs=d.filter(r=>r.motorista===m); if(!rs.length)return'';
     const dv=rs.filter(r=>(r.status||'').includes('Divergente')).length;
@@ -940,6 +1044,224 @@ function closeMod(){ document.getElementById('mover').classList.remove('on'); }
 // ─ UTILS ──────────────────────────────────────────────────
 function showLoad(m){ document.getElementById('lmsg').textContent=m||'Carregando...'; document.getElementById('loader').classList.add('on'); }
 function hideLoad(){ document.getElementById('loader').classList.remove('on'); }
+
+// ─ CADASTROS ──────────────────────────────────────────────
+// Estado em memória — sincronizado com localStorage e Sheets
+let motoristas = JSON.parse(localStorage.getItem('sj_motoristas') || 'null') ||
+  ['Rogério','Roni','Alexander','Rafael','Jefferson'];
+let placas = JSON.parse(localStorage.getItem('sj_placas') || 'null') ||
+  ['FGO-9L43','BZK-9D83','GIN-0H89','OTZ-1H59','FFG-5A41'];
+
+function saveCadLocal(){
+  localStorage.setItem('sj_motoristas', JSON.stringify(motoristas));
+  localStorage.setItem('sj_placas', JSON.stringify(placas));
+}
+
+function loadCadastros(){
+  renderMotoristas();
+  renderPlacas();
+  syncCadFromSheets();
+}
+
+// Renderiza lista de motoristas
+function renderMotoristas(){
+  document.getElementById('mot-count').textContent = motoristas.length;
+  const el = document.getElementById('mot-list');
+  if(!motoristas.length){
+    el.innerHTML = '<div class="cad-empty">Nenhum motorista cadastrado</div>';
+    return;
+  }
+  el.innerHTML = motoristas.map((m,i) => `
+    <div class="cad-item">
+      <span class="cad-ico">🧑‍✈️</span>
+      <div style="flex:1">
+        <div class="cad-name">${m}</div>
+        <div class="cad-meta">${contarEntregas(m,'mot')} entrega(s) registrada(s)</div>
+      </div>
+      <button class="cad-del" onclick="delMotorista(${i})" title="Excluir">🗑</button>
+    </div>`).join('');
+}
+
+// Renderiza lista de placas
+function renderPlacas(){
+  document.getElementById('plc-count').textContent = placas.length;
+  const el = document.getElementById('plc-list');
+  if(!placas.length){
+    el.innerHTML = '<div class="cad-empty">Nenhuma placa cadastrada</div>';
+    return;
+  }
+  el.innerHTML = placas.map((p,i) => `
+    <div class="cad-item">
+      <span class="cad-ico">🚛</span>
+      <div style="flex:1">
+        <div class="cad-name">${p}</div>
+        <div class="cad-meta">${contarEntregas(p,'plc')} entrega(s) registrada(s)</div>
+      </div>
+      <button class="cad-del" onclick="delPlaca(${i})" title="Excluir">🗑</button>
+    </div>`).join('');
+}
+
+// Conta entregas por motorista ou placa (usa allData já carregado)
+function contarEntregas(val, tipo){
+  if(!allData.length) return 0;
+  return tipo==='mot'
+    ? allData.filter(r=>r.motorista===val).length
+    : allData.filter(r=>r.placa===val).length;
+}
+
+// Adicionar motorista
+function addMotorista(){
+  const inp = document.getElementById('new-mot');
+  const v = inp.value.trim();
+  const errEl = document.getElementById('err-mot');
+  if(!v){ inp.classList.add('inv'); errEl.classList.add('on'); return; }
+  inp.classList.remove('inv'); errEl.classList.remove('on');
+  if(motoristas.map(m=>m.toLowerCase()).includes(v.toLowerCase())){
+    inp.classList.add('inv');
+    errEl.textContent = 'Este motorista já está cadastrado';
+    errEl.classList.add('on'); return;
+  }
+  errEl.textContent = 'Informe o nome do motorista';
+  motoristas.push(v);
+  saveCadLocal();
+  renderMotoristas();
+  syncCadToSheets('motoristas');
+  inp.value = '';
+  inp.focus();
+  showToast('✅ Motorista adicionado', v + ' cadastrado com sucesso', 'ok', 3000);
+}
+
+// Excluir motorista
+function delMotorista(i){
+  const nome = motoristas[i];
+  const entregas = contarEntregas(nome, 'mot');
+  const aviso = entregas > 0
+    ? `\n\n⚠️ Atenção: ${entregas} entrega(s) registradas para este motorista não serão excluídas.`
+    : '';
+  if(!confirm(`Excluir o motorista "${nome}"?${aviso}`)) return;
+  motoristas.splice(i, 1);
+  saveCadLocal();
+  renderMotoristas();
+  syncCadToSheets('motoristas');
+  showToast('🗑 Motorista removido', nome + ' foi excluído do cadastro', 'warn', 3000);
+}
+
+// Adicionar placa
+function addPlaca(){
+  const inp = document.getElementById('new-plc');
+  const v = inp.value.trim().toUpperCase();
+  const errEl = document.getElementById('err-plc');
+  if(!v){ inp.classList.add('inv'); errEl.classList.add('on'); return; }
+  inp.classList.remove('inv'); errEl.classList.remove('on');
+  if(placas.includes(v)){
+    inp.classList.add('inv');
+    errEl.textContent = 'Esta placa já está cadastrada';
+    errEl.classList.add('on'); return;
+  }
+  errEl.textContent = 'Informe a placa do veículo';
+  placas.push(v);
+  saveCadLocal();
+  renderPlacas();
+  syncCadToSheets('placas');
+  inp.value = '';
+  inp.focus();
+  showToast('✅ Placa adicionada', v + ' cadastrada com sucesso', 'ok', 3000);
+}
+
+// Excluir placa
+function delPlaca(i){
+  const placa = placas[i];
+  const entregas = contarEntregas(placa, 'plc');
+  const aviso = entregas > 0
+    ? `\n\n⚠️ Atenção: ${entregas} entrega(s) com esta placa não serão excluídas.`
+    : '';
+  if(!confirm(`Excluir a placa "${placa}"?${aviso}`)) return;
+  placas.splice(i, 1);
+  saveCadLocal();
+  renderPlacas();
+  syncCadToSheets('placas');
+  showToast('🗑 Placa removida', placa + ' foi excluída do cadastro', 'warn', 3000);
+}
+
+// ─ SINCRONIZAÇÃO COM SHEETS ──────────────────────────────
+function setSyncStatus(tipo, state, label){
+  const dot = document.getElementById(tipo+'-sync-dot');
+  const lbl = document.getElementById(tipo+'-sync-lbl');
+  if(!dot) return;
+  dot.className = 'cad-sync-dot ' + state;
+  lbl.textContent = label;
+}
+
+async function syncCadToSheets(tipo){
+  if(SCRIPT_URL === 'SUA_URL_AQUI') return;
+  setSyncStatus(tipo==='motoristas'?'mot':'plc', 'loading', 'Salvando na planilha...');
+  try{
+    const payload = { acao: 'salvarCadastros', tipo, motoristas, placas };
+    const r = await fetch(SCRIPT_URL, {
+      method: 'POST',
+      headers: {'Content-Type':'text/plain'},
+      body: JSON.stringify(payload)
+    });
+    const txt = await r.text();
+    const res = JSON.parse(txt);
+    const key = tipo==='motoristas'?'mot':'plc';
+    if(res.ok){
+      setSyncStatus(key, 'ok', 'Sincronizado com Sheets ✓ ' + new Date().toLocaleTimeString('pt-BR'));
+    } else {
+      setSyncStatus(key, 'err', 'Erro ao sincronizar: ' + (res.msg||''));
+    }
+  } catch(e){
+    const key = tipo==='motoristas'?'mot':'plc';
+    setSyncStatus(key, 'err', 'Erro de conexão — dados salvos localmente');
+  }
+}
+
+async function syncCadFromSheets(){
+  if(SCRIPT_URL === 'SUA_URL_AQUI'){
+    setSyncStatus('mot','ok','Usando dados locais');
+    setSyncStatus('plc','ok','Usando dados locais');
+    return;
+  }
+  setSyncStatus('mot','loading','Carregando da planilha...');
+  setSyncStatus('plc','loading','Carregando da planilha...');
+  try{
+    const r = await fetch(SCRIPT_URL + '?acao=listarCadastros');
+    const txt = await r.text();
+    const res = JSON.parse(txt);
+    if(res.ok){
+      if(res.motoristas && res.motoristas.length){
+        motoristas = res.motoristas;
+        saveCadLocal();
+        renderMotoristas();
+      }
+      if(res.placas && res.placas.length){
+        placas = res.placas;
+        saveCadLocal();
+        renderPlacas();
+      }
+      setSyncStatus('mot','ok','Sincronizado ✓ ' + new Date().toLocaleTimeString('pt-BR'));
+      setSyncStatus('plc','ok','Sincronizado ✓ ' + new Date().toLocaleTimeString('pt-BR'));
+    } else {
+      setSyncStatus('mot','err','Usando dados locais');
+      setSyncStatus('plc','err','Usando dados locais');
+    }
+  } catch(e){
+    setSyncStatus('mot','err','Usando dados locais');
+    setSyncStatus('plc','err','Usando dados locais');
+  }
+}
+
+// Atualiza o filtro de motoristas na aba Entregas
+function syncFiltroMotoristas(){
+  const sel = document.getElementById('f-mot');
+  if(!sel) return;
+  const cur = sel.value;
+  sel.innerHTML = '<option value="">Todos</option>' +
+    motoristas.map(m=>`<option${m===cur?' selected':''}>${m}</option>`).join('');
+}
+
+// Override renderTable p/ atualizar filtro tbm
+const _origRenderTable = renderTable;
 
 // Init
 document.getElementById('app').style.display='none';
