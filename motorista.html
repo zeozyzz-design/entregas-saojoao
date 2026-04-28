@@ -175,9 +175,7 @@ select option{background:#1a1a1a}
     <div class="fld">
       <label>Motorista <span class="req">*</span></label>
       <select id="s-mot">
-        <option value="">Selecione o motorista</option>
-        <option>Rogério</option><option>Roni</option>
-        <option>Alexander</option><option>Rafael</option><option>Jefferson</option>
+        <option value="">Carregando...</option>
       </select>
       <div class="errmsg" id="em-mot">Selecione o motorista</div>
     </div>
@@ -185,9 +183,7 @@ select option{background:#1a1a1a}
     <div class="fld">
       <label>Placa do Veículo <span class="req">*</span></label>
       <select id="s-plc">
-        <option value="">Selecione a placa</option>
-        <option>FGO-9L43</option><option>BZK-9D83</option>
-        <option>GIN-0H89</option><option>OTZ-1H59</option><option>FFG-5A41</option>
+        <option value="">Carregando...</option>
       </select>
       <div class="errmsg" id="em-plc">Selecione a placa</div>
     </div>
@@ -297,6 +293,46 @@ select option{background:#1a1a1a}
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz6Ak0kA5h6a1EzgZc-h9MUc75uYPPSnyfll8RM6X31f4SJ2HIbfU1z8prIbDtqex1Rfw/exec';
 // ══════════════════════════════════════════════════════════
 
+// Defaults caso a API não responda
+const DEFAULT_MOTS = ['Rogério','Roni','Alexander','Rafael','Jefferson'];
+const DEFAULT_PLCS = ['FGO-9L43','BZK-9D83','GIN-0H89','OTZ-1H59','FFG-5A41'];
+
+// Carrega motoristas e placas do backend (ou usa cache local)
+async function carregarCadastros(){
+  const selMot = document.getElementById('s-mot');
+  const selPlc = document.getElementById('s-plc');
+
+  // Tenta cache primeiro para resposta imediata
+  const cachedMots = JSON.parse(localStorage.getItem('sj_motoristas') || 'null') || DEFAULT_MOTS;
+  const cachedPlcs = JSON.parse(localStorage.getItem('sj_placas') || 'null') || DEFAULT_PLCS;
+  popularSelect(selMot, cachedMots, 'Selecione o motorista');
+  popularSelect(selPlc, cachedPlcs, 'Selecione a placa');
+
+  // Tenta atualizar do backend em background
+  if(SCRIPT_URL !== 'SUA_URL_AQUI'){
+    try{
+      const r = await fetch(SCRIPT_URL + '?acao=listarCadastros');
+      const res = JSON.parse(await r.text());
+      if(res.ok){
+        if(res.motoristas && res.motoristas.length){
+          localStorage.setItem('sj_motoristas', JSON.stringify(res.motoristas));
+          popularSelect(selMot, res.motoristas, 'Selecione o motorista');
+        }
+        if(res.placas && res.placas.length){
+          localStorage.setItem('sj_placas', JSON.stringify(res.placas));
+          popularSelect(selPlc, res.placas, 'Selecione a placa');
+        }
+      }
+    } catch(e){ /* usa cache */ }
+  }
+}
+
+function popularSelect(sel, lista, placeholder){
+  const cur = sel.value;
+  sel.innerHTML = `<option value="">${placeholder}</option>` +
+    lista.map(v => `<option${v===cur?' selected':''}>${v}</option>`).join('');
+}
+
 // Alerta visual se URL não configurada
 if(SCRIPT_URL === 'SUA_URL_AQUI'){
   document.getElementById('url-warn').classList.add('show');
@@ -309,6 +345,9 @@ if(SCRIPT_URL === 'SUA_URL_AQUI'){
   const M=['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
   document.getElementById('hdate').innerHTML=D[d.getDay()]+' '+d.getDate()+'<br>'+M[d.getMonth()];
 })();
+
+// Carrega listas dinâmicas do backend
+carregarCadastros();
 
 // Progresso
 function prog(){
