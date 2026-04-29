@@ -461,55 +461,116 @@ tbody td{padding:11px 14px;vertical-align:middle;white-space:nowrap}
   <!-- ── CONFIGURAÇÕES ── -->
   <div class="pane" id="pane-cfg">
 
-    <div class="sec">WhatsApp — Notificações</div>
+    <!-- SELETOR DE CANAL -->
+    <div class="sec">Canal de Notificações</div>
     <div class="cfg-box">
-      <h4>📱 Configuração do WhatsApp (Callmebot)</h4>
-      <div class="cfg-row">
-        <div class="cfg-fld">
-          <label>Número WhatsApp do Faturamento</label>
-          <input type="text" id="cfg-wanum" placeholder="5535999999999 (com DDI, sem + ou espaços)">
+      <h4>📡 Escolha como receber alertas de novas entregas</h4>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:4px">
+        <div class="notif-canal" id="canal-telegram" onclick="setCanalNotif('telegram')">
+          <div class="canal-ico">✈️</div>
+          <div class="canal-title">Telegram</div>
+          <div class="canal-sub">Recomendado — API oficial, gratuito e confiável</div>
+          <div class="canal-badge" id="badge-telegram">✓ Ativo</div>
         </div>
-        <div class="cfg-fld">
-          <label>API Key Callmebot</label>
-          <input type="text" id="cfg-wakey" placeholder="Ex: 123456">
+        <div class="notif-canal" id="canal-whatsapp" onclick="setCanalNotif('whatsapp')">
+          <div class="canal-ico">📱</div>
+          <div class="canal-title">WhatsApp</div>
+          <div class="canal-sub">Via Callmebot — gratuito, requer ativação manual</div>
+          <div class="canal-badge" id="badge-whatsapp">✓ Ativo</div>
         </div>
-        <button class="cfg-save" onclick="saveCfgWA()">Salvar</button>
       </div>
-      <div class="cfg-info">
-        <strong>Como ativar (gratuito, 1 vez só):</strong><br>
-        1. O celular do faturamento envia a mensagem <strong>I allow callmebot to send me messages</strong> para <strong>+34 644 77 34 53</strong> no WhatsApp<br>
-        2. Em segundos receberá a <strong>API Key</strong> — cole acima<br>
-        3. Salve e pronto! A cada nova entrega uma mensagem é enviada automaticamente
-      </div>
-      <div class="cfg-status" id="cfg-wa-status"></div>
     </div>
 
-    <div class="sec">Notificações na Plataforma</div>
+    <!-- TELEGRAM CONFIG -->
+    <div id="cfg-telegram-box">
+      <div class="sec">Telegram — Configuração</div>
+      <div class="cfg-box">
+        <h4>✈️ Bot do Telegram</h4>
+        <div class="cfg-row">
+          <div class="cfg-fld">
+            <label>Token do Bot</label>
+            <input type="text" id="cfg-tg-token" placeholder="Ex: 7612345678:AAFabcxyz...">
+          </div>
+          <div class="cfg-fld">
+            <label>Chat ID do Faturamento</label>
+            <input type="text" id="cfg-tg-chatid" placeholder="Ex: -1001234567890">
+          </div>
+          <button class="cfg-save" onclick="saveCfgTelegram()">Salvar</button>
+        </div>
+        <div class="cfg-info">
+          <strong style="color:var(--info)">Como configurar (5 minutos, gratuito para sempre):</strong><br><br>
+          <strong>Passo 1 — Criar o bot:</strong> Abra o Telegram, procure <strong>@BotFather</strong>, envie <code>/newbot</code>, escolha um nome (ex: <em>SaoJoaoEntregas</em>) e usuário terminando em <em>_bot</em>. O BotFather enviará o <strong>Token</strong> — copie e cole acima.<br><br>
+          <strong>Passo 2 — Criar grupo:</strong> Crie um grupo chamado <em>"Faturamento São João"</em>, adicione o bot como membro e envie qualquer mensagem no grupo.<br><br>
+          <strong>Passo 3 — Pegar o Chat ID:</strong> Acesse no navegador:<br>
+          <code>https://api.telegram.org/bot<strong>SEU_TOKEN</strong>/getUpdates</code><br>
+          Procure por <strong>"chat":{"id":</strong> — o número negativo ali é o Chat ID.<br><br>
+          <strong>Passo 4:</strong> Cole Token e Chat ID acima, salve e teste!
+        </div>
+        <div class="cfg-status" id="cfg-tg-status"></div>
+      </div>
+      <div class="cfg-box" style="margin-top:12px">
+        <h4>🧪 Testar Telegram</h4>
+        <div class="cfg-row">
+          <button class="cfg-save" onclick="testarTelegram()" style="width:auto">Enviar mensagem de teste</button>
+          <div class="cfg-status" id="cfg-tg-test" style="display:block;margin-top:0;align-self:center"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WHATSAPP CONFIG -->
+    <div id="cfg-whatsapp-box" style="display:none">
+      <div class="sec">WhatsApp — Configuração (Callmebot)</div>
+      <div class="cfg-box">
+        <h4>📱 Callmebot</h4>
+        <div class="cfg-row">
+          <div class="cfg-fld">
+            <label>Número WhatsApp (com DDI)</label>
+            <input type="text" id="cfg-wanum" placeholder="5535999999999">
+          </div>
+          <div class="cfg-fld">
+            <label>API Key Callmebot</label>
+            <input type="text" id="cfg-wakey" placeholder="Ex: 123456">
+          </div>
+          <button class="cfg-save" onclick="saveCfgWA()">Salvar</button>
+        </div>
+        <div class="cfg-info">
+          <strong style="color:var(--warn)">⚠️ Número atualizado do bot:</strong><br><br>
+          <strong>Passo 1:</strong> Adicione <strong>+34 698 28 89 73</strong> na agenda como <em>CallMeBot</em><br>
+          <strong>Passo 2:</strong> Envie no WhatsApp para esse contato:<br>
+          <code>I allow callmebot to send me messages</code><br>
+          <strong>Passo 3:</strong> Aguarde a resposta com a <strong>API Key</strong> (até 2 min)<br>
+          <strong>Passo 4:</strong> Cole número e API Key acima e salve<br><br>
+          <em style="color:var(--txt2)">Número alternativo se não funcionar: <strong>+34 644 77 34 53</strong></em>
+        </div>
+        <div class="cfg-status" id="cfg-wa-status"></div>
+      </div>
+      <div class="cfg-box" style="margin-top:12px">
+        <h4>🧪 Testar WhatsApp</h4>
+        <div class="cfg-row">
+          <button class="cfg-save" onclick="testarWA()" style="width:auto">Enviar mensagem de teste</button>
+          <div class="cfg-status" id="cfg-test-status" style="display:block;margin-top:0;align-self:center"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- POLLING -->
+    <div class="sec">Monitoramento em Tempo Real</div>
     <div class="cfg-box">
-      <h4>🔔 Monitoramento em Tempo Real</h4>
+      <h4>🔔 Intervalo de verificação automática</h4>
       <div class="cfg-row">
         <div class="cfg-fld">
-          <label>Intervalo de verificação (segundos)</label>
+          <label>Verificar a cada (segundos)</label>
           <input type="number" id="cfg-interval" value="30" min="10" max="300">
         </div>
         <button class="cfg-save" onclick="saveCfgPoll()">Salvar</button>
       </div>
       <div class="cfg-info">
-        O painel verifica automaticamente se chegaram novas entregas no intervalo configurado.
-        Quando detectar uma nova entrega, o sino 🔔 irá piscar e um alerta aparecerá na tela.
+        O painel verifica silenciosamente novas entregas no intervalo configurado.
+        O sino 🔔 pisca e um alerta aparece a cada nova entrega detectada.
       </div>
     </div>
 
-    <div class="sec">Testar Notificações</div>
-    <div class="cfg-box">
-      <h4>🧪 Teste de WhatsApp</h4>
-      <div class="cfg-row">
-        <button class="cfg-save" onclick="testarWA()" style="width:auto">Enviar mensagem de teste</button>
-        <div class="cfg-status" id="cfg-test-status" style="display:block;margin-top:0;align-self:center"></div>
-      </div>
-    </div>
   </div>
-
   <!-- ── CADASTROS ── -->
   <div class="pane" id="pane-cad">
 
@@ -812,55 +873,82 @@ function adicionarNotificacao(entrega){
   } catch(e){}
 }
 
-// ─ CONFIGURAÇÕES WA ───────────────────────────────────────
-function loadCfgWA(){
-  document.getElementById('cfg-wanum').value = localStorage.getItem('sj_wa_num') || '';
-  document.getElementById('cfg-wakey').value = localStorage.getItem('sj_wa_key') || '';
-  document.getElementById('cfg-interval').value = pollInterval;
+// ─ CANAL DE NOTIFICAÇÃO ──────────────────────────────────
+let canalAtivo = localStorage.getItem('sj_canal') || 'telegram';
+
+function setCanalNotif(canal){
+  canalAtivo = canal;
+  localStorage.setItem('sj_canal', canal);
+  document.getElementById('canal-telegram').classList.toggle('active', canal==='telegram');
+  document.getElementById('canal-whatsapp').classList.toggle('active', canal==='whatsapp');
+  document.getElementById('cfg-telegram-box').style.display = canal==='telegram'?'block':'none';
+  document.getElementById('cfg-whatsapp-box').style.display = canal==='whatsapp'?'block':'none';
 }
 
-function saveCfgWA(){
-  const num = document.getElementById('cfg-wanum').value.trim();
-  const key = document.getElementById('cfg-wakey').value.trim();
-  localStorage.setItem('sj_wa_num', num);
-  localStorage.setItem('sj_wa_key', key);
-  const s = document.getElementById('cfg-wa-status');
-  s.textContent = '✅ Configurações de WhatsApp salvas!';
+// ─ TELEGRAM ──────────────────────────────────────────────
+function saveCfgTelegram(){
+  localStorage.setItem('sj_tg_token',  document.getElementById('cfg-tg-token').value.trim());
+  localStorage.setItem('sj_tg_chatid', document.getElementById('cfg-tg-chatid').value.trim());
+  const s = document.getElementById('cfg-tg-status');
+  s.textContent = '✅ Configurações do Telegram salvas!';
   s.className = 'cfg-status show ok';
   setTimeout(()=>s.classList.remove('show'), 3000);
 }
 
-function saveCfgPoll(){
-  const v = parseInt(document.getElementById('cfg-interval').value) || 30;
-  pollInterval = Math.max(10, Math.min(300, v));
-  savePollInterval(pollInterval);
-  startPolling();
-  showToast('✓ Configuração salva', 'Verificando a cada '+pollInterval+' segundos', 'ok', 4000);
+async function testarTelegram(){
+  const token  = localStorage.getItem('sj_tg_token');
+  const chatid = localStorage.getItem('sj_tg_chatid');
+  const s = document.getElementById('cfg-tg-test');
+  if(!token||!chatid){ s.textContent='❌ Configure o Token e Chat ID primeiro'; s.className='cfg-status show err'; return; }
+  s.textContent='⏳ Enviando...'; s.className='cfg-status show';
+  try{
+    const resp = await fetch(`https://api.telegram.org/bot${token}/sendMessage`,{
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({chat_id:chatid, text:'🧪 *Teste — São João Ferro e Aço*\nSistema de entregas funcionando!', parse_mode:'Markdown'})
+    });
+    const r = await resp.json();
+    if(r.ok){ s.textContent='✅ Mensagem enviada! Verifique o Telegram.'; s.className='cfg-status show ok'; }
+    else{ s.textContent='❌ Erro: '+(r.description||'Verifique Token e Chat ID'); s.className='cfg-status show err'; }
+  }catch(e){ s.textContent='❌ '+e.message; s.className='cfg-status show err'; }
+}
+
+// ─ WHATSAPP (CALLMEBOT) ───────────────────────────────────
+function saveCfgWA(){
+  localStorage.setItem('sj_wa_num', document.getElementById('cfg-wanum').value.trim());
+  localStorage.setItem('sj_wa_key', document.getElementById('cfg-wakey').value.trim());
+  const s = document.getElementById('cfg-wa-status');
+  s.textContent='✅ Configurações salvas!'; s.className='cfg-status show ok';
+  setTimeout(()=>s.classList.remove('show'), 3000);
 }
 
 async function testarWA(){
   const num = localStorage.getItem('sj_wa_num');
   const key = localStorage.getItem('sj_wa_key');
   const s = document.getElementById('cfg-test-status');
-  if(!num || !key){
-    s.textContent = '❌ Configure o número e a API Key primeiro';
-    s.className = 'cfg-status show err';
-    return;
-  }
-  s.textContent = '⏳ Enviando...';
-  s.className = 'cfg-status show';
+  if(!num||!key){ s.textContent='❌ Configure o número e API Key primeiro'; s.className='cfg-status show err'; return; }
+  s.textContent='⏳ Enviando...'; s.className='cfg-status show';
   try{
-    const msg = encodeURIComponent('🧪 Teste de notificação — São João Ferro e Aço\nSistema de entregas funcionando corretamente!');
-    const url = `https://api.callmebot.com/whatsapp.php?phone=${num}&text=${msg}&apikey=${key}`;
-    await fetch(url, {mode:'no-cors'});
-    s.textContent = '✅ Mensagem enviada! Verifique o WhatsApp em instantes.';
-    s.className = 'cfg-status show ok';
-  } catch(e){
-    s.textContent = '❌ Erro: ' + e.message;
-    s.className = 'cfg-status show err';
-  }
+    const msg = encodeURIComponent('🧪 Teste — São João Ferro e Aço\nSistema funcionando!');
+    await fetch(`https://api.callmebot.com/whatsapp.php?phone=${num}&text=${msg}&apikey=${key}`,{mode:'no-cors'});
+    s.textContent='✅ Requisição enviada! Verifique o WhatsApp (1-2 min).'; s.className='cfg-status show ok';
+  }catch(e){ s.textContent='❌ '+e.message; s.className='cfg-status show err'; }
 }
 
+function saveCfgPoll(){
+  const v=parseInt(document.getElementById('cfg-interval').value)||30;
+  pollInterval=Math.max(10,Math.min(300,v));
+  savePollInterval(pollInterval); startPolling();
+  showToast('✓ Configuração salva','Verificando a cada '+pollInterval+' segundos','ok',4000);
+}
+
+function loadCfgWA(){
+  document.getElementById('cfg-tg-token').value  = localStorage.getItem('sj_tg_token')  || '';
+  document.getElementById('cfg-tg-chatid').value = localStorage.getItem('sj_tg_chatid') || '';
+  document.getElementById('cfg-wanum').value = localStorage.getItem('sj_wa_num') || '';
+  document.getElementById('cfg-wakey').value = localStorage.getItem('sj_wa_key') || '';
+  document.getElementById('cfg-interval').value = pollInterval;
+  setCanalNotif(canalAtivo);
+}
 // ─ LOGIN / AUTH ───────────────────────────────────────────
 function goTo(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
