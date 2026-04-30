@@ -760,16 +760,23 @@ function loadCfgWA(){
 // ─ AUTH ─────────────────────────────────────────────────────
 function goTo(id){ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active')); document.getElementById(id).classList.add('active'); ['lerr','cerr','cok'].forEach(i=>document.getElementById(i).classList.remove('show')); }
 function doLogin(){
-  const u=document.getElementById('lu').value,p=document.getElementById('lp').value;
-  if(u==='Gerencial'&&p===getPass()){
-    document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-    document.getElementById('app').style.display='flex';
-    document.getElementById('uname').textContent='Bem-vindo, '+u;
-    updateBadge(); loadData(); startPolling(); loadCfgWA();
-  }else{
-    document.getElementById('lp').classList.add('inv');
-    document.getElementById('lerr').classList.add('show');
-    setTimeout(()=>document.getElementById('lp').classList.remove('inv'),2000);
+  try {
+    const u=document.getElementById('lu').value,p=document.getElementById('lp').value;
+    const expected=getPass();
+    console.log('Login attempt — user:',u,'pass length:',p.length,'expected length:',expected.length,'match:',p===expected);
+    if(u==='Gerencial'&&p===expected){
+      document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+      document.getElementById('app').style.display='flex';
+      document.getElementById('uname').textContent='Bem-vindo, '+u;
+      updateBadge(); loadData(); startPolling(); loadCfgWA();
+    }else{
+      document.getElementById('lp').classList.add('inv');
+      document.getElementById('lerr').classList.add('show');
+      setTimeout(()=>document.getElementById('lp').classList.remove('inv'),2000);
+    }
+  } catch(e) {
+    alert('Erro no login: '+e.message);
+    console.error('Login error:',e);
   }
 }
 function doLogout(){ stopPolling(); document.getElementById('app').style.display='none'; document.getElementById('lp').value=''; goTo('scr-login'); }
@@ -835,18 +842,26 @@ function renderDash(d){
   const mots=motoristas.length?motoristas:['Rogério','Roni','Alexander','Rafael','Jefferson'];
 
   // Tabela resumo
-  document.getElementById('otbody').innerHTML=mots.map(m=>{
-    const rs=d.filter(r=>r.motorista===m); if(!rs.length)return'';
-    const mfat=rs.reduce((a,r)=>a+(parseFloat(r.nfValor)||0),0);
-    const mrec=rs.reduce((a,r)=>a+(parseFloat(r.valorRecebido)||0),0);
-    const dv=rs.filter(r=>(r.status||'').includes('Divergente')).length;
-    const ov=rs.filter(r=>(r.status||'').includes('Ocorrência')).length;
-    return`<tr><td><strong>${m}</strong></td><td>${rs.length}</td><td>${fmt(mfat)}</td><td>${fmt(mrec)}</td>
-      <td style="color:${dv?'var(--err)':'var(--txt2)}">${dv}</td>
-      <td style="color:${ov?'var(--warn)':'var(--txt2)}">${ov}</td></tr>`;
+  document.getElementById('otbody').innerHTML=mots.map(function(m){
+    var rs=d.filter(function(r){return r.motorista===m;}); if(!rs.length)return'';
+    var mfat=rs.reduce(function(a,r){return a+(parseFloat(r.nfValor)||0);},0);
+    var mrec=rs.reduce(function(a,r){return a+(parseFloat(r.valorRecebido)||0);},0);
+    var dv=rs.filter(function(r){return(r.status||'').includes('Divergente');}).length;
+    var ov=rs.filter(function(r){return(r.status||'').includes('Ocorrência');}).length;
+    var dvc=dv?'var(--err)':'var(--txt2)';
+    var ovc=ov?'var(--warn)':'var(--txt2)';
+    var row='<tr>';
+    row+='<td><strong>'+m+'</strong></td>';
+    row+='<td>'+rs.length+'</td>';
+    row+='<td>'+fmt(mfat)+'</td>';
+    row+='<td>'+fmt(mrec)+'</td>';
+    row+='<td style="color:'+dvc+'">'+dv+'</td>';
+    row+='<td style="color:'+ovc+'">'+ov+'</td>';
+    row+='</tr>';
+    return row;
   }).join('')||'<tr><td colspan="6" style="text-align:center;color:var(--txt2);padding:24px">Sem dados</td></tr>';
 
-  // Gráfico barras — motoristas
+    // Gráfico barras — motoristas
   const maxMot=Math.max(...mots.map(m=>d.filter(r=>r.motorista===m).length),1);
   document.getElementById('chart-mots').innerHTML=mots.map(m=>{
     const n=d.filter(r=>r.motorista===m).length;
