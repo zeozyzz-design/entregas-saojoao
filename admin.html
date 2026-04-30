@@ -17,12 +17,8 @@
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 body{background:var(--bg);color:var(--txt);font-family:'Roboto',sans-serif;min-height:100vh}
-
-/* ─ SCREENS ─ */
 .screen{min-height:100vh;display:none;flex-direction:column;align-items:center;justify-content:center;padding:24px}
 .screen.active{display:flex}
-
-/* ─ CARD LOGIN ─ */
 .card{width:100%;max-width:380px;background:var(--surf);border:1px solid var(--bdr);border-radius:14px;padding:32px 28px}
 .card img{display:block;height:50px;margin:0 auto 22px;object-fit:contain}
 .card h2{font-family:'Roboto Condensed',sans-serif;font-size:20px;font-weight:700;text-align:center;margin-bottom:4px}
@@ -46,13 +42,8 @@ body{background:var(--bg);color:var(--txt);font-family:'Roboto',sans-serif;min-h
 .str-bar{height:4px;background:var(--bdr);border-radius:2px;margin-top:6px;overflow:hidden}
 .str-fill{height:100%;width:0;border-radius:2px;transition:width .3s,background .3s}
 .str-lbl{font-size:11px;color:var(--txt2);margin-top:3px;height:14px}
-
-/* ─ APP ─ */
 #app{display:none;flex-direction:column;min-height:100vh}
-
-/* ─ TOPBAR ─ */
-.topbar{background:#111;border-bottom:3px solid var(--ora);padding:0 16px;height:58px;
-  display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:200}
+.topbar{background:#111;border-bottom:3px solid var(--ora);padding:0 16px;height:58px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:200}
 .topbar img{height:36px;object-fit:contain;flex-shrink:0}
 .topbar-info{flex:1;min-width:0}
 .topbar-info h1{font-family:'Roboto Condensed',sans-serif;font-size:15px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -60,51 +51,28 @@ body{background:var(--bg);color:var(--txt);font-family:'Roboto',sans-serif;min-h
 .topbar-btns{display:flex;gap:6px;align-items:center;flex-shrink:0}
 .tbtn{background:var(--surf2);border:1px solid var(--bdr);border-radius:8px;padding:7px 11px;font-size:12px;color:var(--txt2);cursor:pointer;font-family:'Roboto Condensed',sans-serif;font-weight:700;letter-spacing:.5px;text-transform:uppercase;transition:all .2s;white-space:nowrap}
 .tbtn:hover{border-color:var(--ora);color:var(--ora)}
-
-/* ─ SINO DE NOTIFICAÇÕES ─ */
-.notif-btn{position:relative;background:var(--surf2);border:1px solid var(--bdr);border-radius:8px;
-  width:36px;height:36px;display:flex;align-items:center;justify-content:center;
-  cursor:pointer;transition:all .2s;font-size:18px;flex-shrink:0}
+.notif-btn{position:relative;background:var(--surf2);border:1px solid var(--bdr);border-radius:8px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;font-size:18px;flex-shrink:0}
 .notif-btn:hover{border-color:var(--ora)}
 .notif-btn.has-new{border-color:var(--ora);animation:pulse 2s ease-in-out infinite}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(232,98,26,.4)}50%{box-shadow:0 0 0 6px rgba(232,98,26,0)}}
-.notif-badge{position:absolute;top:-6px;right:-6px;background:var(--err);color:#fff;
-  font-size:10px;font-weight:700;font-family:'Roboto Condensed',sans-serif;
-  min-width:18px;height:18px;border-radius:9px;display:flex;align-items:center;
-  justify-content:center;padding:0 4px;border:2px solid var(--bg);display:none}
+.notif-badge{position:absolute;top:-6px;right:-6px;background:var(--err);color:#fff;font-size:10px;font-weight:700;font-family:'Roboto Condensed',sans-serif;min-width:18px;height:18px;border-radius:9px;display:flex;align-items:center;justify-content:center;padding:0 4px;border:2px solid var(--bg);display:none}
 .notif-badge.show{display:flex}
-
-/* ─ GAVETA DE NOTIFICAÇÕES ─ */
-.notif-drawer{
-  position:fixed;top:0;right:-380px;width:360px;max-width:95vw;
-  height:100vh;background:var(--surf);border-left:1px solid var(--bdr);
-  z-index:500;transition:right .3s cubic-bezier(.4,0,.2,1);
-  display:flex;flex-direction:column;
-}
+.notif-drawer{position:fixed;top:0;right:-380px;width:360px;max-width:95vw;height:100vh;background:var(--surf);border-left:1px solid var(--bdr);z-index:500;transition:right .3s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column}
 .notif-drawer.open{right:0}
 .notif-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:499;display:none}
 .notif-overlay.on{display:block}
 .ndrawer-head{padding:16px 18px;border-bottom:1px solid var(--bdr);display:flex;align-items:center;gap:10px;flex-shrink:0}
 .ndrawer-head h3{font-family:'Roboto Condensed',sans-serif;font-size:17px;font-weight:700;flex:1}
-.ndrawer-head .nd-count{background:var(--ora2);color:var(--ora);border:1px solid rgba(232,98,26,.3);font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px;font-family:'Roboto Condensed',sans-serif}
+.nd-count{background:var(--ora2);color:var(--ora);border:1px solid rgba(232,98,26,.3);font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px;font-family:'Roboto Condensed',sans-serif}
 .nd-close{background:var(--surf2);border:none;color:var(--txt2);font-size:16px;cursor:pointer;border-radius:6px;width:30px;height:30px;display:flex;align-items:center;justify-content:center}
-.nd-close:hover{color:var(--txt)}
 .nd-actions{padding:10px 18px;border-bottom:1px solid var(--bdr);display:flex;gap:8px;flex-shrink:0}
 .nd-btn{padding:6px 12px;border-radius:6px;font-size:12px;font-weight:700;font-family:'Roboto Condensed',sans-serif;letter-spacing:.5px;text-transform:uppercase;cursor:pointer;border:1px solid var(--bdr);background:transparent;color:var(--txt2);transition:all .2s}
 .nd-btn:hover{border-color:var(--txt2);color:var(--txt)}
 .nd-btn.danger{border-color:rgba(224,85,85,.3);color:var(--err)}
-.nd-btn.danger:hover{background:rgba(224,85,85,.1)}
 .notif-list{flex:1;overflow-y:auto;padding:8px}
 .notif-empty{text-align:center;padding:48px 20px;color:var(--txt2)}
 .notif-empty .neo{font-size:36px;margin-bottom:10px}
-.notif-empty p{font-size:13px}
-
-/* ─ ITEM DE NOTIFICAÇÃO ─ */
-.nitem{
-  background:var(--surf2);border:1px solid var(--bdr);border-radius:10px;
-  padding:14px;margin-bottom:8px;cursor:pointer;transition:all .2s;
-  border-left:3px solid var(--bdr);position:relative;
-}
+.nitem{background:var(--surf2);border:1px solid var(--bdr);border-radius:10px;padding:14px;margin-bottom:8px;cursor:pointer;transition:all .2s;border-left:3px solid var(--bdr);position:relative}
 .nitem:hover{border-color:var(--ora);background:#1e1e1e}
 .nitem.unread{border-left-color:var(--ora);background:rgba(232,98,26,.05)}
 .nitem.unread::before{content:'';position:absolute;top:14px;right:14px;width:7px;height:7px;background:var(--ora);border-radius:50%}
@@ -118,18 +86,8 @@ body{background:var(--bg);color:var(--txt);font-family:'Roboto',sans-serif;min-h
 .nitem-body{font-size:12px;color:var(--txt2);line-height:1.5}
 .nitem-body strong{color:var(--txt);font-weight:500}
 .nitem-status{display:inline-block;margin-top:6px}
-
-/* ─ TOAST NOTIFICATION ─ */
 .toast-wrap{position:fixed;top:70px;right:16px;z-index:600;display:flex;flex-direction:column;gap:8px;pointer-events:none}
-.toast{
-  background:var(--surf);border:1px solid var(--bdr);border-radius:12px;
-  padding:14px 16px;width:320px;max-width:calc(100vw - 32px);
-  display:flex;gap:12px;align-items:flex-start;
-  box-shadow:0 8px 32px rgba(0,0,0,.6);pointer-events:all;
-  transform:translateX(calc(100% + 20px));opacity:0;
-  transition:transform .35s cubic-bezier(.34,1.2,.64,1),opacity .3s;
-  border-left:3px solid var(--ora);
-}
+.toast{background:var(--surf);border:1px solid var(--bdr);border-radius:12px;padding:14px 16px;width:320px;max-width:calc(100vw - 32px);display:flex;gap:12px;align-items:flex-start;box-shadow:0 8px 32px rgba(0,0,0,.6);pointer-events:all;transform:translateX(calc(100% + 20px));opacity:0;transition:transform .35s cubic-bezier(.34,1.2,.64,1),opacity .3s;border-left:3px solid var(--ora)}
 .toast.show{transform:translateX(0);opacity:1}
 .toast.leaving{transform:translateX(calc(100% + 20px));opacity:0}
 .toast-ico{font-size:22px;line-height:1;flex-shrink:0;margin-top:1px}
@@ -137,32 +95,150 @@ body{background:var(--bg);color:var(--txt);font-family:'Roboto',sans-serif;min-h
 .toast-title{font-size:13px;font-weight:700;margin-bottom:3px}
 .toast-msg{font-size:12px;color:var(--txt2);line-height:1.4}
 .toast-close{background:none;border:none;color:var(--txt2);cursor:pointer;font-size:16px;padding:0;line-height:1;flex-shrink:0}
-.toast.t-err{border-left-color:var(--err)}
-.toast.t-warn{border-left-color:var(--warn)}
-.toast.t-ok{border-left-color:var(--ok)}
-
-/* ─ TABS ─ */
+.toast.t-err{border-left-color:var(--err)}.toast.t-warn{border-left-color:var(--warn)}.toast.t-ok{border-left-color:var(--ok)}
 .tabs{display:flex;background:var(--surf);border-bottom:1px solid var(--bdr);overflow-x:auto}
 .tab{flex:1;min-width:80px;padding:12px;font-size:12px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;text-align:center;color:var(--txt2);cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;font-family:'Roboto Condensed',sans-serif;white-space:nowrap}
 .tab.on{color:var(--ora);border-bottom-color:var(--ora)}
-
-/* ─ PANES ─ */
 .pane{flex:1;padding:20px;max-width:1200px;margin:0 auto;width:100%;display:none}
 .pane.on{display:block}
 
-/* ─ KPI CARDS ─ */
-.kgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:24px}
-.kcard{background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r);padding:16px;border-left:3px solid var(--bdr)}
+/* ── KPI ── */
+.kgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:20px}
+.kcard{background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r);padding:16px 16px 12px;border-left:3px solid var(--bdr);position:relative;overflow:hidden}
 .kcard.ora{border-left-color:var(--ora)}.kcard.ok{border-left-color:var(--ok)}
 .kcard.warn{border-left-color:var(--warn)}.kcard.err{border-left-color:var(--err)}
+.kcard-spark{position:absolute;bottom:0;right:0;opacity:.15}
 .klbl{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--txt2);margin-bottom:6px}
 .kval{font-family:'Roboto Condensed',sans-serif;font-size:26px;font-weight:700;line-height:1}
 .ksub{font-size:11px;color:var(--txt2);margin-top:4px}
+.ktrend{font-size:11px;margin-top:6px;display:flex;align-items:center;gap:4px}
+.ktrend.up{color:var(--ok)}.ktrend.down{color:var(--err)}.ktrend.neu{color:var(--txt2)}
 
+/* ── CHARTS ── */
+.chart-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.chart-box{background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r);padding:16px}
+.chart-box h4{font-family:'Roboto Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--txt2);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.chart-box h4::before{content:'';width:3px;height:14px;background:var(--ora);border-radius:2px}
+.bar-chart{display:flex;flex-direction:column;gap:8px}
+.bar-row{display:flex;align-items:center;gap:10px;font-size:12px}
+.bar-label{width:80px;color:var(--txt2);text-align:right;flex-shrink:0;font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bar-track{flex:1;background:var(--surf2);border-radius:4px;height:20px;overflow:hidden;position:relative}
+.bar-fill{height:100%;border-radius:4px;transition:width .6s cubic-bezier(.4,0,.2,1);min-width:2px;display:flex;align-items:center;justify-content:flex-end;padding-right:6px}
+.bar-val{font-size:10px;font-weight:700;color:#fff;font-family:'Roboto Condensed',sans-serif;white-space:nowrap}
+.donut-wrap{display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap}
+.donut-legend{display:flex;flex-direction:column;gap:8px}
+.dl-item{display:flex;align-items:center;gap:8px;font-size:12px}
+.dl-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.dl-label{color:var(--txt2)}
+.dl-val{font-weight:700;margin-left:auto;padding-left:12px}
+.pgto-bars{display:flex;height:28px;border-radius:6px;overflow:hidden;gap:2px}
+.pgto-bar{display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;transition:flex .6s;min-width:0;overflow:hidden;font-family:'Roboto Condensed',sans-serif}
+
+/* ── SECTION ── */
 .sec{font-family:'Roboto Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--txt2);margin:20px 0 12px;display:flex;align-items:center;gap:8px}
 .sec::before{content:'';width:3px;height:14px;background:var(--ora);border-radius:2px}
 
-/* ─ CONFIG PAINEL ─ */
+/* ── FILTERS ── */
+.filters{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px}
+.ffld{display:flex;flex-direction:column;gap:4px;flex:1;min-width:130px}
+.ffld label{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--txt2)}
+.ffld input,.ffld select{background:var(--surf);border:1.5px solid var(--bdr);border-radius:8px;color:var(--txt);font-family:'Roboto',sans-serif;font-size:14px;padding:10px 12px;outline:none;transition:border-color .2s;-webkit-appearance:none;appearance:none}
+.ffld input:focus,.ffld select:focus{border-color:var(--ora)}
+.ffld select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:34px}
+.ffld select option{background:#1a1a1a}
+.fbtn{align-self:flex-end;padding:10px 18px;background:var(--ora);color:#fff;border:none;border-radius:8px;font-family:'Roboto Condensed',sans-serif;font-size:14px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;cursor:pointer;white-space:nowrap}
+.fbtn2{align-self:flex-end;padding:10px 14px;background:transparent;color:var(--txt2);border:1px solid var(--bdr);border-radius:8px;font-family:'Roboto Condensed',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;white-space:nowrap}
+.fbtn2:hover{border-color:var(--txt2);color:var(--txt)}
+
+/* ── TABLE ── */
+.twrap{overflow-x:auto;border-radius:var(--r);border:1px solid var(--bdr)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+thead tr{background:var(--surf2)}
+thead th{padding:12px 14px;text-align:left;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--txt2);white-space:nowrap}
+tbody tr{border-top:1px solid var(--bdr);cursor:pointer;transition:background .15s}
+tbody tr:hover{background:rgba(232,98,26,.05)}
+tbody td{padding:11px 14px;vertical-align:middle;white-space:nowrap}
+.pill{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase}
+.p-ok{background:rgba(76,186,122,.12);color:var(--ok);border:1px solid rgba(76,186,122,.3)}
+.p-div{background:rgba(224,85,85,.1);color:var(--err);border:1px solid rgba(224,85,85,.3)}
+.p-oco{background:rgba(240,184,64,.1);color:var(--warn);border:1px solid rgba(240,184,64,.3)}
+.p-del{background:rgba(255,255,255,.05);color:var(--txt2);border:1px solid var(--bdr)}
+.empty{text-align:center;padding:48px 20px;color:var(--txt2)}
+.empty .eico{font-size:40px;margin-bottom:12px}
+.btn-del-row{background:transparent;border:1px solid transparent;border-radius:6px;color:var(--txt2);font-size:13px;cursor:pointer;padding:5px 7px;transition:all .2s;line-height:1}
+.btn-del-row:hover{border-color:rgba(224,85,85,.4);color:var(--err);background:rgba(224,85,85,.08)}
+
+/* ── PAGINATION ── */
+.pag{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:16px}
+.pgbtn{background:var(--surf);border:1px solid var(--bdr);border-radius:8px;padding:7px 14px;font-size:13px;font-weight:700;color:var(--txt2);cursor:pointer;transition:all .2s;font-family:'Roboto Condensed',sans-serif}
+.pgbtn:hover:not(:disabled){border-color:var(--ora);color:var(--ora)}
+.pgbtn:disabled{opacity:.3;cursor:not-allowed}
+.pginfo{font-size:13px;color:var(--txt2)}
+
+/* ── MODAL ── */
+.mover{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:300;overflow-y:auto;padding:20px;align-items:flex-start;justify-content:center}
+.mover.on{display:flex}
+.modal{background:var(--surf);border:1px solid var(--bdr);border-radius:14px;padding:24px;width:100%;max-width:540px;margin:auto;animation:sup .25s ease}
+@keyframes sup{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
+.mhdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;border-bottom:1px solid var(--bdr);padding-bottom:14px}
+.mhdr h3{font-family:'Roboto Condensed',sans-serif;font-size:18px;font-weight:700}
+.mclose{background:var(--surf2);border:none;color:var(--txt2);font-size:18px;cursor:pointer;border-radius:6px;width:32px;height:32px;display:flex;align-items:center;justify-content:center}
+.mrow{display:flex;justify-content:space-between;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--bdr);font-size:14px;gap:12px}
+.mrow:last-of-type{border-bottom:none}
+.mrow .mk{color:var(--txt2);font-size:11px;letter-spacing:.5px;text-transform:uppercase;font-weight:700;white-space:nowrap;padding-top:1px}
+.mrow .mv{color:var(--txt);font-weight:500;text-align:right}
+.mimg{width:100%;max-height:240px;object-fit:contain;border-radius:8px;margin-top:12px;border:1px solid var(--bdr)}
+.modal-footer{display:flex;justify-content:flex-end;gap:10px;margin-top:20px;padding-top:16px;border-top:1px solid var(--bdr)}
+.mbtn-del{padding:10px 20px;background:rgba(224,85,85,.1);color:var(--err);border:1px solid rgba(224,85,85,.3);border-radius:8px;font-family:'Roboto Condensed',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s}
+.mbtn-del:hover{background:rgba(224,85,85,.2)}
+.mbtn-close{padding:10px 20px;background:var(--surf2);color:var(--txt2);border:1px solid var(--bdr);border-radius:8px;font-family:'Roboto Condensed',sans-serif;font-size:14px;font-weight:700;cursor:pointer}
+
+/* ── LOADER ── */
+.loader{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:400;flex-direction:column;align-items:center;justify-content:center;gap:12px}
+.loader.on{display:flex}
+.spin{width:44px;height:44px;border:3px solid #333;border-top-color:var(--ora);border-radius:50%;animation:sp .8s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.loader p{color:var(--txt2);font-size:14px}
+
+/* ── POLL ── */
+.poll-indicator{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--txt2);padding:4px 0}
+.poll-dot{width:6px;height:6px;border-radius:50%;background:var(--ok);flex-shrink:0;animation:blink 2s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.poll-dot.off{background:var(--err);animation:none}
+
+/* ── HIST (histórico excluídos) ── */
+.hist-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(224,85,85,.08);border:1px solid rgba(224,85,85,.2);color:var(--err);font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;font-family:'Roboto Condensed',sans-serif}
+.hist-item{background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r);padding:14px 16px;margin-bottom:8px;opacity:.7}
+.hist-item:hover{opacity:1}
+
+/* ── CADASTROS ── */
+.cad-cols{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.cad-card{background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r);overflow:hidden}
+.cad-head{padding:14px 18px;border-bottom:1px solid var(--bdr);display:flex;align-items:center;gap:10px}
+.cad-head h4{font-family:'Roboto Condensed',sans-serif;font-size:15px;font-weight:700;flex:1}
+.cad-count{background:var(--ora2);color:var(--ora);border:1px solid rgba(232,98,26,.3);font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px;font-family:'Roboto Condensed',sans-serif}
+.cad-form{padding:14px 18px;border-bottom:1px solid var(--bdr);display:flex;gap:8px;align-items:flex-end}
+.cad-input{flex:1;background:var(--bg);border:1.5px solid var(--bdr);border-radius:8px;color:var(--txt);font-family:'Roboto',sans-serif;font-size:14px;padding:10px 12px;outline:none;transition:border-color .2s;-webkit-appearance:none}
+.cad-input:focus{border-color:var(--ora)}
+.cad-input.inv{border-color:var(--err)!important}
+.cad-add{padding:10px 16px;background:var(--ora);color:#fff;border:none;border-radius:8px;font-family:'Roboto Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;cursor:pointer;white-space:nowrap}
+.cad-errmsg{font-size:11px;color:var(--err);padding:4px 18px 0;display:none}
+.cad-errmsg.on{display:block}
+.cad-list{max-height:360px;overflow-y:auto}
+.cad-item{display:flex;align-items:center;padding:11px 18px;border-bottom:1px solid var(--bdr);gap:10px;transition:background .15s}
+.cad-item:last-child{border-bottom:none}
+.cad-item:hover{background:rgba(255,255,255,.03)}
+.cad-ico{font-size:18px;flex-shrink:0}
+.cad-name{flex:1;font-size:14px;font-weight:500}
+.cad-meta{font-size:11px;color:var(--txt2);margin-top:1px}
+.cad-del{background:transparent;border:1px solid transparent;border-radius:6px;color:var(--txt2);font-size:14px;cursor:pointer;padding:5px 7px;transition:all .2s;line-height:1;flex-shrink:0}
+.cad-del:hover{border-color:rgba(224,85,85,.4);color:var(--err);background:rgba(224,85,85,.08)}
+.cad-empty{text-align:center;padding:32px 20px;color:var(--txt2);font-size:13px}
+.cad-sync{display:flex;align-items:center;gap:8px;padding:10px 18px;font-size:11px;color:var(--txt2);border-top:1px solid var(--bdr);background:rgba(255,255,255,.02)}
+.cad-sync-dot{width:6px;height:6px;border-radius:50%;background:var(--txt2);flex-shrink:0}
+.cad-sync-dot.ok{background:var(--ok)}.cad-sync-dot.err{background:var(--err)}.cad-sync-dot.loading{background:var(--warn);animation:blink 1s infinite}
+
+/* ── CFG ── */
 .cfg-box{background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r);padding:20px;margin-bottom:16px}
 .cfg-box h4{font-family:'Roboto Condensed',sans-serif;font-size:14px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px}
 .cfg-row{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;margin-bottom:10px}
@@ -177,136 +253,36 @@ body{background:var(--bg);color:var(--txt);font-family:'Roboto',sans-serif;min-h
 .cfg-status{font-size:12px;margin-top:8px;display:none}
 .cfg-status.show{display:block}
 .cfg-status.ok{color:var(--ok)}.cfg-status.err{color:var(--err)}
+.cfg-box code{display:inline-block;background:rgba(255,255,255,.06);border:1px solid var(--bdr);border-radius:4px;padding:2px 6px;font-size:12px;font-family:monospace;color:var(--txt);margin:2px 0}
+.notif-canal{background:var(--surf2);border:2px solid var(--bdr);border-radius:var(--r);padding:16px;cursor:pointer;transition:all .2s;position:relative;text-align:center}
+.notif-canal:hover{border-color:var(--txt2)}
+.notif-canal.active{border-color:var(--ora);background:var(--ora2)}
+.canal-ico{font-size:28px;margin-bottom:6px}
+.canal-title{font-family:'Roboto Condensed',sans-serif;font-size:15px;font-weight:700;margin-bottom:4px}
+.canal-sub{font-size:11px;color:var(--txt2);line-height:1.4}
+.canal-badge{display:none;position:absolute;top:8px;right:8px;background:var(--ok);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:8px;font-family:'Roboto Condensed',sans-serif}
+.notif-canal.active .canal-badge{display:block}
 
-/* ─ FILTERS ─ */
-.filters{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px}
-.ffld{display:flex;flex-direction:column;gap:4px;flex:1;min-width:130px}
-.ffld label{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--txt2)}
-.ffld input,.ffld select{background:var(--surf);border:1.5px solid var(--bdr);border-radius:8px;color:var(--txt);font-family:'Roboto',sans-serif;font-size:14px;padding:10px 12px;outline:none;transition:border-color .2s;-webkit-appearance:none;appearance:none}
-.ffld input:focus,.ffld select:focus{border-color:var(--ora)}
-.ffld select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:34px}
-.ffld select option{background:#1a1a1a}
-.fbtn{align-self:flex-end;padding:10px 18px;background:var(--ora);color:#fff;border:none;border-radius:8px;font-family:'Roboto Condensed',sans-serif;font-size:14px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;cursor:pointer;white-space:nowrap}
-.fbtn2{align-self:flex-end;padding:10px 14px;background:transparent;color:var(--txt2);border:1px solid var(--bdr);border-radius:8px;font-family:'Roboto Condensed',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;white-space:nowrap}
-.fbtn2:hover{border-color:var(--txt2);color:var(--txt)}
-
-/* ─ TABLE ─ */
-.twrap{overflow-x:auto;border-radius:var(--r);border:1px solid var(--bdr)}
-table{width:100%;border-collapse:collapse;font-size:13px}
-thead tr{background:var(--surf2)}
-thead th{padding:12px 14px;text-align:left;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--txt2);white-space:nowrap}
-tbody tr{border-top:1px solid var(--bdr);cursor:pointer;transition:background .15s}
-tbody tr:hover{background:rgba(232,98,26,.05)}
-tbody td{padding:11px 14px;vertical-align:middle;white-space:nowrap}
-.pill{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase}
-.p-ok{background:rgba(76,186,122,.12);color:var(--ok);border:1px solid rgba(76,186,122,.3)}
-.p-div{background:rgba(224,85,85,.1);color:var(--err);border:1px solid rgba(224,85,85,.3)}
-.p-oco{background:rgba(240,184,64,.1);color:var(--warn);border:1px solid rgba(240,184,64,.3)}
-.p-bth{background:rgba(224,85,85,.1);color:var(--err);border:1px solid rgba(224,85,85,.3)}
-.empty{text-align:center;padding:48px 20px;color:var(--txt2)}
-.empty .eico{font-size:40px;margin-bottom:12px}
-
-/* ─ PAGINATION ─ */
-.pag{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:16px}
-.pgbtn{background:var(--surf);border:1px solid var(--bdr);border-radius:8px;padding:7px 14px;font-size:13px;font-weight:700;color:var(--txt2);cursor:pointer;transition:all .2s;font-family:'Roboto Condensed',sans-serif}
-.pgbtn:hover:not(:disabled){border-color:var(--ora);color:var(--ora)}
-.pgbtn:disabled{opacity:.3;cursor:not-allowed}
-.pginfo{font-size:13px;color:var(--txt2)}
-
-/* ─ MODAL ─ */
-.mover{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:300;overflow-y:auto;padding:20px;align-items:flex-start;justify-content:center}
-.mover.on{display:flex}
-.modal{background:var(--surf);border:1px solid var(--bdr);border-radius:14px;padding:24px;width:100%;max-width:540px;margin:auto;animation:sup .25s ease}
-@keyframes sup{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
-.mhdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;border-bottom:1px solid var(--bdr);padding-bottom:14px}
-.mhdr h3{font-family:'Roboto Condensed',sans-serif;font-size:18px;font-weight:700}
-.mclose{background:var(--surf2);border:none;color:var(--txt2);font-size:18px;cursor:pointer;border-radius:6px;width:32px;height:32px;display:flex;align-items:center;justify-content:center}
-.mrow{display:flex;justify-content:space-between;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--bdr);font-size:14px;gap:12px}
-.mrow:last-of-type{border-bottom:none}
-.mrow .mk{color:var(--txt2);font-size:11px;letter-spacing:.5px;text-transform:uppercase;font-weight:700;white-space:nowrap;padding-top:1px}
-.mrow .mv{color:var(--txt);font-weight:500;text-align:right}
-.mimg{width:100%;max-height:240px;object-fit:contain;border-radius:8px;margin-top:12px;border:1px solid var(--bdr)}
-
-/* ─ LOADER ─ */
-.loader{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:400;flex-direction:column;align-items:center;justify-content:center;gap:12px}
-.loader.on{display:flex}
-.spin{width:44px;height:44px;border:3px solid #333;border-top-color:var(--ora);border-radius:50%;animation:sp .8s linear infinite}
-@keyframes sp{to{transform:rotate(360deg)}}
-.loader p{color:var(--txt2);font-size:14px}
-
-/* ─ MISC ─ */
+/* ── OTABLE ── */
 .otable{width:100%;border-collapse:collapse;font-size:13px}
 .otable thead tr{background:var(--surf2)}
 .otable th{padding:10px 14px;text-align:left;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--txt2)}
 .otable td{padding:10px 14px;border-top:1px solid var(--bdr)}
-
-.poll-indicator{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--txt2);padding:4px 0}
-.poll-dot{width:6px;height:6px;border-radius:50%;background:var(--ok);flex-shrink:0;animation:blink 2s ease-in-out infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
-.poll-dot.off{background:var(--err);animation:none}
 
 @media(max-width:600px){
   .kgrid{grid-template-columns:1fr 1fr}
   .topbar-info h1{font-size:12px}
   .pane{padding:12px}
   .notif-drawer{width:100%;max-width:100vw}
-  .cad-cols{grid-template-columns:1fr!important}
+  .cad-cols{grid-template-columns:1fr}
+  .chart-row{grid-template-columns:1fr}
 }
-
-/* ─ CADASTROS ─ */
-.cad-cols{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.cad-card{background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r);overflow:hidden}
-.cad-head{padding:14px 18px;border-bottom:1px solid var(--bdr);display:flex;align-items:center;gap:10px}
-.cad-head h4{font-family:'Roboto Condensed',sans-serif;font-size:15px;font-weight:700;flex:1}
-.cad-count{background:var(--ora2);color:var(--ora);border:1px solid rgba(232,98,26,.3);
-  font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px;font-family:'Roboto Condensed',sans-serif}
-.cad-form{padding:14px 18px;border-bottom:1px solid var(--bdr);display:flex;gap:8px;align-items:flex-end}
-.cad-input{flex:1;background:var(--bg);border:1.5px solid var(--bdr);border-radius:8px;
-  color:var(--txt);font-family:'Roboto',sans-serif;font-size:14px;padding:10px 12px;
-  outline:none;transition:border-color .2s;-webkit-appearance:none}
-.cad-input:focus{border-color:var(--ora)}
-.cad-input.inv{border-color:var(--err)!important}
-.cad-add{padding:10px 16px;background:var(--ora);color:#fff;border:none;border-radius:8px;
-  font-family:'Roboto Condensed',sans-serif;font-size:13px;font-weight:700;
-  letter-spacing:.5px;text-transform:uppercase;cursor:pointer;white-space:nowrap;transition:opacity .2s}
-.cad-add:active{opacity:.8}
-.cad-errmsg{font-size:11px;color:var(--err);padding:4px 18px 0;display:none}
-.cad-errmsg.on{display:block}
-.cad-list{max-height:360px;overflow-y:auto}
-.cad-item{display:flex;align-items:center;padding:11px 18px;border-bottom:1px solid var(--bdr);
-  gap:10px;transition:background .15s}
-.cad-item:last-child{border-bottom:none}
-.cad-item:hover{background:rgba(255,255,255,.03)}
-.cad-ico{font-size:18px;flex-shrink:0}
-.cad-name{flex:1;font-size:14px;font-weight:500}
-.cad-meta{font-size:11px;color:var(--txt2);margin-top:1px}
-.cad-del{background:transparent;border:1px solid transparent;border-radius:6px;
-  color:var(--txt2);font-size:14px;cursor:pointer;padding:5px 7px;transition:all .2s;
-  line-height:1;flex-shrink:0}
-.cad-del:hover{border-color:rgba(224,85,85,.4);color:var(--err);background:rgba(224,85,85,.08)}
-.cad-empty{text-align:center;padding:32px 20px;color:var(--txt2);font-size:13px}
-.cad-sync{display:flex;align-items:center;gap:8px;padding:10px 18px;font-size:11px;color:var(--txt2);
-  border-top:1px solid var(--bdr);background:rgba(255,255,255,.02)}
-.cad-sync-dot{width:6px;height:6px;border-radius:50%;background:var(--txt2);flex-shrink:0}
-.cad-sync-dot.ok{background:var(--ok)}
-.cad-sync-dot.err{background:var(--err)}
-.cad-sync-dot.loading{background:var(--warn);animation:blink 1s infinite}
-.cad-saving{display:none;position:absolute;top:0;left:0;right:0;bottom:0;
-  background:rgba(26,26,26,.7);align-items:center;justify-content:center;border-radius:var(--r)}
-.cad-saving.on{display:flex}
 </style>
 </head>
 <body>
-
 <div class="loader" id="loader"><div class="spin"></div><p id="lmsg">Carregando...</p></div>
-
-<!-- TOAST CONTAINER -->
 <div class="toast-wrap" id="toast-wrap"></div>
-
-<!-- NOTIF OVERLAY -->
 <div class="notif-overlay" id="notif-overlay" onclick="closeDrawer()"></div>
-
-<!-- GAVETA DE NOTIFICAÇÕES -->
 <div class="notif-drawer" id="notif-drawer">
   <div class="ndrawer-head">
     <h3>🔔 Notificações</h3>
@@ -314,140 +290,139 @@ tbody td{padding:11px 14px;vertical-align:middle;white-space:nowrap}
     <button class="nd-close" onclick="closeDrawer()">✕</button>
   </div>
   <div class="nd-actions">
-    <button class="nd-btn" onclick="markAllRead()">✓ Marcar todas como lidas</button>
-    <button class="nd-btn danger" onclick="clearAllNotifs()">🗑 Limpar todas</button>
+    <button class="nd-btn" onclick="markAllRead()">✓ Marcar lidas</button>
+    <button class="nd-btn danger" onclick="clearAllNotifs()">🗑 Limpar</button>
   </div>
-  <div class="notif-list" id="notif-list">
-    <div class="notif-empty"><div class="neo">🔕</div><p>Nenhuma notificação ainda</p></div>
-  </div>
+  <div class="notif-list" id="notif-list"><div class="notif-empty"><div class="neo">🔕</div><p>Nenhuma notificação</p></div></div>
 </div>
 
-<!-- ═══ LOGIN ═══ -->
+<!-- LOGIN -->
 <div class="screen active" id="scr-login">
   <div class="card">
     <img src="data:image/webp;base64,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" alt="São João">
     <h2>Painel Administrativo</h2>
     <div class="sub">Acesso restrito — Gerencial</div>
-    <div class="fld">
-      <label>Usuário</label>
-      <select id="lu">
-        <option value="">Selecione o usuário</option>
-        <option value="Gerencial">Gerencial</option>
-      </select>
-    </div>
-    <div class="fld">
-      <label>Senha</label>
-      <input type="password" id="lp" placeholder="••••••••" autocomplete="current-password"
-        onkeydown="if(event.key==='Enter')doLogin()">
-    </div>
+    <div class="fld"><label>Usuário</label>
+      <select id="lu"><option value="">Selecione</option><option value="Gerencial">Gerencial</option></select></div>
+    <div class="fld"><label>Senha</label>
+      <input type="password" id="lp" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()"></div>
     <button class="btn" onclick="doLogin()">Entrar</button>
     <div class="alert err" id="lerr">Usuário ou senha incorretos</div>
     <div class="link" onclick="goTo('scr-senha')">🔑 Alterar senha</div>
   </div>
 </div>
 
-<!-- ═══ TROCAR SENHA ═══ -->
+<!-- TROCAR SENHA -->
 <div class="screen" id="scr-senha">
   <div class="card">
     <img src="data:image/webp;base64,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" alt="São João">
     <h2>Alterar Senha</h2>
-    <div class="sub">Confirme sua identidade para prosseguir</div>
-    <div class="fld">
-      <label>Usuário</label>
-      <select id="cu">
-        <option value="">Selecione</option>
-        <option value="Gerencial">Gerencial</option>
-      </select>
-    </div>
+    <div class="sub">Confirme sua identidade</div>
+    <div class="fld"><label>Usuário</label>
+      <select id="cu"><option value="">Selecione</option><option value="Gerencial">Gerencial</option></select></div>
     <div class="fld"><label>Senha atual</label><input type="password" id="cc" placeholder="Senha atual"></div>
-    <div class="fld">
-      <label>Nova senha (mín. 8 caracteres)</label>
+    <div class="fld"><label>Nova senha (mín. 8)</label>
       <input type="password" id="cn" placeholder="Nova senha" oninput="chkStr(this.value)">
       <div class="str-bar"><div class="str-fill" id="sf"></div></div>
-      <div class="str-lbl" id="sl"></div>
-    </div>
-    <div class="fld"><label>Confirmar nova senha</label><input type="password" id="cf" placeholder="Repita a nova senha"></div>
+      <div class="str-lbl" id="sl"></div></div>
+    <div class="fld"><label>Confirmar nova senha</label><input type="password" id="cf" placeholder="Repita"></div>
     <button class="btn" onclick="doChangePwd()">Salvar Nova Senha</button>
     <div class="alert err" id="cerr"></div>
     <div class="alert ok" id="cok">✅ Senha alterada! Faça login novamente.</div>
-    <div class="link2" onclick="goTo('scr-login')">← Voltar ao login</div>
+    <div class="link2" onclick="goTo('scr-login')">← Voltar</div>
   </div>
 </div>
 
-<!-- ═══ APP ═══ -->
+<!-- APP -->
 <div id="app">
-
   <div class="topbar">
     <img src="data:image/webp;base64,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" alt="São João">
-    <div class="topbar-info">
-      <h1>Painel Gerencial</h1>
-      <p id="uname">Bem-vindo</p>
-    </div>
+    <div class="topbar-info"><h1>Painel Gerencial</h1><p id="uname">Bem-vindo</p></div>
     <div class="topbar-btns">
-      <!-- SINO -->
-      <div class="notif-btn" id="notif-btn" onclick="toggleDrawer()" title="Notificações">
-        🔔
-        <div class="notif-badge" id="notif-badge">0</div>
-      </div>
+      <div class="notif-btn" id="notif-btn" onclick="toggleDrawer()">🔔<div class="notif-badge" id="notif-badge">0</div></div>
       <button class="tbtn" onclick="loadData()">↻</button>
       <button class="tbtn" onclick="doLogout()">Sair</button>
     </div>
   </div>
-
   <div class="tabs">
-    <div class="tab on"  onclick="showPane('dash',this)">📊 Dashboard</div>
-    <div class="tab"     onclick="showPane('list',this)">📦 Entregas</div>
-    <div class="tab"     onclick="showPane('cad',this);loadCadastros()">👥 Cadastros</div>
-    <div class="tab"     onclick="showPane('cfg',this)">⚙️ Configurações</div>
+    <div class="tab on" onclick="showPane('dash',this)">📊 Dashboard</div>
+    <div class="tab" onclick="showPane('list',this)">📦 Entregas</div>
+    <div class="tab" onclick="showPane('hist',this)">🗃 Histórico</div>
+    <div class="tab" onclick="showPane('cad',this);loadCadastros()">👥 Cadastros</div>
+    <div class="tab" onclick="showPane('cfg',this)">⚙️ Config</div>
   </div>
 
-  <!-- ── DASHBOARD ── -->
+  <!-- DASHBOARD -->
   <div class="pane on" id="pane-dash">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px">
-      <div class="poll-indicator">
-        <div class="poll-dot" id="poll-dot"></div>
-        <span id="poll-label">Verificando novas entregas...</span>
-      </div>
+      <div class="poll-indicator"><div class="poll-dot" id="poll-dot"></div><span id="poll-label">Verificando...</span></div>
     </div>
     <div class="kgrid">
-      <div class="kcard ora"><div class="klbl">Total Entregas</div><div class="kval" id="k-tot">—</div><div class="ksub">registros</div></div>
-      <div class="kcard ok"><div class="klbl">Total Faturado</div><div class="kval" id="k-fat">—</div><div class="ksub">valor das NFs</div></div>
+      <div class="kcard ora">
+        <div class="klbl">Total Entregas</div><div class="kval" id="k-tot">—</div><div class="ksub">registros</div>
+        <svg class="kcard-spark" width="60" height="30" viewBox="0 0 60 30"><polyline id="spark-tot" fill="none" stroke="var(--ora)" stroke-width="1.5" opacity=".5" points=""/></svg>
+      </div>
+      <div class="kcard ok"><div class="klbl">Total Faturado</div><div class="kval" id="k-fat">—</div><div class="ksub">valor das NFs</div>
+        <svg class="kcard-spark" width="60" height="30" viewBox="0 0 60 30"><polyline id="spark-fat" fill="none" stroke="var(--ok)" stroke-width="1.5" opacity=".5" points=""/></svg>
+      </div>
       <div class="kcard ok"><div class="klbl">Total Recebido</div><div class="kval" id="k-rec">—</div><div class="ksub">na entrega</div></div>
       <div class="kcard warn"><div class="klbl">Diferença</div><div class="kval" id="k-dif">—</div><div class="ksub">fat. × recebido</div></div>
-      <div class="kcard err"><div class="klbl">Divergências</div><div class="kval" id="k-div">—</div><div class="ksub">valores diferentes</div></div>
-      <div class="kcard warn"><div class="klbl">Com Ocorrência</div><div class="kval" id="k-oco">—</div><div class="ksub">registros</div></div>
+      <div class="kcard err"><div class="klbl">Divergências</div><div class="kval" id="k-div">—</div><div class="ksub" id="k-div-pct"></div></div>
+      <div class="kcard warn"><div class="klbl">Com Ocorrência</div><div class="kval" id="k-oco">—</div><div class="ksub" id="k-oco-pct"></div></div>
     </div>
+
+    <!-- GRÁFICOS -->
+    <div class="chart-row">
+      <div class="chart-box">
+        <h4>Entregas por motorista</h4>
+        <div class="bar-chart" id="chart-mots"></div>
+      </div>
+      <div class="chart-box">
+        <h4>Status das entregas</h4>
+        <div class="donut-wrap">
+          <canvas id="donut-canvas" width="110" height="110"></canvas>
+          <div class="donut-legend" id="donut-legend"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-row">
+      <div class="chart-box">
+        <h4>Tipos de pagamento</h4>
+        <div id="pgto-chart"></div>
+      </div>
+      <div class="chart-box">
+        <h4>Entregas últimos 7 dias</h4>
+        <div class="bar-chart" id="chart-days"></div>
+      </div>
+    </div>
+
     <div class="sec">Resumo por motorista</div>
     <div class="twrap">
       <table class="otable">
-        <thead><tr><th>Motorista</th><th>Entregas</th><th>Divergências</th><th>Ocorrências</th><th>Normal</th></tr></thead>
+        <thead><tr><th>Motorista</th><th>Entregas</th><th>Faturado</th><th>Recebido</th><th>Divergências</th><th>Ocorrências</th></tr></thead>
         <tbody id="otbody"></tbody>
       </table>
     </div>
   </div>
 
-  <!-- ── ENTREGAS ── -->
+  <!-- ENTREGAS -->
   <div class="pane" id="pane-list">
     <div class="filters">
       <div class="ffld"><label>Data inicial</label><input type="date" id="f-di"></div>
       <div class="ffld"><label>Data final</label><input type="date" id="f-df"></div>
       <div class="ffld"><label>Motorista</label>
-        <select id="f-mot">
-          <option value="">Todos</option>
+        <select id="f-mot"><option value="">Todos</option>
           <option>Rogério</option><option>Roni</option><option>Alexander</option><option>Rafael</option><option>Jefferson</option>
-        </select>
-      </div>
+        </select></div>
       <div class="ffld"><label>Status</label>
-        <select id="f-sta">
-          <option value="">Todos</option><option>Normal</option><option>Divergente</option><option>Com Ocorrência</option>
-        </select>
-      </div>
+        <select id="f-sta"><option value="">Todos</option><option>Normal</option><option>Divergente</option><option>Com Ocorrência</option></select></div>
       <button class="fbtn" onclick="applyFil()">Filtrar</button>
       <button class="fbtn2" onclick="clearFil()">Limpar</button>
     </div>
     <div class="twrap">
       <table>
-        <thead><tr><th>Data/Hora</th><th>Motorista</th><th>Placa</th><th>NF</th><th>Valor NF</th><th>Pgto</th><th>Status</th></tr></thead>
+        <thead><tr><th>Data/Hora</th><th>Motorista</th><th>Placa</th><th>NF</th><th>Valor NF</th><th>Pgto</th><th>Status</th><th></th></tr></thead>
         <tbody id="tbody"></tbody>
       </table>
     </div>
@@ -458,587 +433,391 @@ tbody td{padding:11px 14px;vertical-align:middle;white-space:nowrap}
     </div>
   </div>
 
-  <!-- ── CONFIGURAÇÕES ── -->
-  <div class="pane" id="pane-cfg">
+  <!-- HISTÓRICO DE EXCLUÍDOS -->
+  <div class="pane" id="pane-hist">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px">
+      <div>
+        <div class="sec" style="margin:0 0 4px">Entregas excluídas</div>
+        <div style="font-size:12px;color:var(--txt2)">Registros removidos ficam aqui por 30 dias</div>
+      </div>
+      <button onclick="limparHistorico()" style="padding:8px 16px;background:transparent;border:1px solid rgba(224,85,85,.3);color:var(--err);border-radius:8px;font-family:'Roboto Condensed',sans-serif;font-size:12px;font-weight:700;cursor:pointer;text-transform:uppercase;letter-spacing:.5px">🗑 Limpar histórico</button>
+    </div>
+    <div id="hist-list"><div class="empty"><div class="eico">🗃</div><p>Nenhuma entrega excluída ainda</p></div></div>
+  </div>
 
-    <!-- SELETOR DE CANAL -->
+  <!-- CADASTROS -->
+  <div class="pane" id="pane-cad">
+    <div class="sec">Motoristas e Veículos</div>
+    <div style="background:rgba(74,144,217,.08);border:1px solid rgba(74,144,217,.2);border-radius:var(--r);padding:12px 16px;margin-bottom:20px;font-size:13px;color:#8ab4d9;line-height:1.6">
+      <strong style="color:var(--info)">ℹ️ Sincronização automática</strong> — Cadastros salvos localmente e na planilha Google Sheets.
+    </div>
+    <div class="cad-cols">
+      <div class="cad-card">
+        <div class="cad-head"><span class="cad-ico">🧑‍✈️</span><h4>Motoristas</h4><span class="cad-count" id="mot-count">0</span></div>
+        <div class="cad-form">
+          <input class="cad-input" id="new-mot" placeholder="Nome do motorista" maxlength="60" onkeydown="if(event.key==='Enter')addMotorista()">
+          <button class="cad-add" onclick="addMotorista()">+ Adicionar</button>
+        </div>
+        <div class="cad-errmsg" id="err-mot">Informe o nome</div>
+        <div class="cad-list" id="mot-list"></div>
+        <div class="cad-sync"><div class="cad-sync-dot" id="mot-sync-dot"></div><span id="mot-sync-lbl">Aguardando...</span></div>
+      </div>
+      <div class="cad-card">
+        <div class="cad-head"><span class="cad-ico">🚛</span><h4>Veículos / Placas</h4><span class="cad-count" id="plc-count">0</span></div>
+        <div class="cad-form">
+          <input class="cad-input" id="new-plc" placeholder="Ex: ABC-1234" maxlength="10" style="text-transform:uppercase" oninput="this.value=this.value.toUpperCase()" onkeydown="if(event.key==='Enter')addPlaca()">
+          <button class="cad-add" onclick="addPlaca()">+ Adicionar</button>
+        </div>
+        <div class="cad-errmsg" id="err-plc">Informe a placa</div>
+        <div class="cad-list" id="plc-list"></div>
+        <div class="cad-sync"><div class="cad-sync-dot" id="plc-sync-dot"></div><span id="plc-sync-lbl">Aguardando...</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONFIGURAÇÕES -->
+  <div class="pane" id="pane-cfg">
     <div class="sec">Canal de Notificações</div>
     <div class="cfg-box">
-      <h4>📡 Escolha como receber alertas de novas entregas</h4>
+      <h4>📡 Canal de alertas</h4>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:4px">
         <div class="notif-canal" id="canal-telegram" onclick="setCanalNotif('telegram')">
-          <div class="canal-ico">✈️</div>
-          <div class="canal-title">Telegram</div>
-          <div class="canal-sub">Recomendado — API oficial, gratuito e confiável</div>
-          <div class="canal-badge" id="badge-telegram">✓ Ativo</div>
+          <div class="canal-ico">✈️</div><div class="canal-title">Telegram</div>
+          <div class="canal-sub">Recomendado</div><div class="canal-badge" id="badge-telegram">✓ Ativo</div>
         </div>
         <div class="notif-canal" id="canal-whatsapp" onclick="setCanalNotif('whatsapp')">
-          <div class="canal-ico">📱</div>
-          <div class="canal-title">WhatsApp</div>
-          <div class="canal-sub">Via Callmebot — gratuito, requer ativação manual</div>
-          <div class="canal-badge" id="badge-whatsapp">✓ Ativo</div>
+          <div class="canal-ico">📱</div><div class="canal-title">WhatsApp</div>
+          <div class="canal-sub">Via Callmebot</div><div class="canal-badge" id="badge-whatsapp">✓ Ativo</div>
         </div>
       </div>
     </div>
-
-    <!-- TELEGRAM CONFIG -->
     <div id="cfg-telegram-box">
-      <div class="sec">Telegram — Configuração</div>
+      <div class="sec">Telegram</div>
       <div class="cfg-box">
         <h4>✈️ Bot do Telegram</h4>
         <div class="cfg-row">
-          <div class="cfg-fld">
-            <label>Token do Bot</label>
-            <input type="text" id="cfg-tg-token" placeholder="Ex: 7612345678:AAFabcxyz...">
-          </div>
-          <div class="cfg-fld">
-            <label>Chat ID do Faturamento</label>
-            <input type="text" id="cfg-tg-chatid" placeholder="Ex: -1001234567890">
-          </div>
+          <div class="cfg-fld"><label>Token do Bot</label><input type="text" id="cfg-tg-token" placeholder="7612345678:AAFabc..."></div>
+          <div class="cfg-fld"><label>Chat ID</label><input type="text" id="cfg-tg-chatid" placeholder="-1001234567890"></div>
           <button class="cfg-save" onclick="saveCfgTelegram()">Salvar</button>
         </div>
         <div class="cfg-info">
-          <strong style="color:var(--info)">Como configurar (5 minutos, gratuito para sempre):</strong><br><br>
-          <strong>Passo 1 — Criar o bot:</strong> Abra o Telegram, procure <strong>@BotFather</strong>, envie <code>/newbot</code>, escolha um nome (ex: <em>SaoJoaoEntregas</em>) e usuário terminando em <em>_bot</em>. O BotFather enviará o <strong>Token</strong> — copie e cole acima.<br><br>
-          <strong>Passo 2 — Criar grupo:</strong> Crie um grupo chamado <em>"Faturamento São João"</em>, adicione o bot como membro e envie qualquer mensagem no grupo.<br><br>
-          <strong>Passo 3 — Pegar o Chat ID:</strong> Acesse no navegador:<br>
-          <code>https://api.telegram.org/bot<strong>SEU_TOKEN</strong>/getUpdates</code><br>
-          Procure por <strong>"chat":{"id":</strong> — o número negativo ali é o Chat ID.<br><br>
-          <strong>Passo 4:</strong> Cole Token e Chat ID acima, salve e teste!
+          <strong>Passo 1:</strong> @BotFather → <code>/newbot</code> → copie o Token<br>
+          <strong>Passo 2:</strong> Crie um grupo, adicione o bot, mande uma mensagem<br>
+          <strong>Passo 3:</strong> Acesse <code>https://api.telegram.org/botTOKEN/getUpdates</code> → pegue o Chat ID (número negativo)
         </div>
         <div class="cfg-status" id="cfg-tg-status"></div>
       </div>
-      <div class="cfg-box" style="margin-top:12px">
-        <h4>🧪 Testar Telegram</h4>
+      <div class="cfg-box"><h4>🧪 Testar Telegram</h4>
         <div class="cfg-row">
-          <button class="cfg-save" onclick="testarTelegram()" style="width:auto">Enviar mensagem de teste</button>
+          <button class="cfg-save" onclick="testarTelegram()" style="width:auto">Enviar teste</button>
           <div class="cfg-status" id="cfg-tg-test" style="display:block;margin-top:0;align-self:center"></div>
         </div>
       </div>
     </div>
-
-    <!-- WHATSAPP CONFIG -->
     <div id="cfg-whatsapp-box" style="display:none">
-      <div class="sec">WhatsApp — Configuração (Callmebot)</div>
+      <div class="sec">WhatsApp — Callmebot</div>
       <div class="cfg-box">
         <h4>📱 Callmebot</h4>
         <div class="cfg-row">
-          <div class="cfg-fld">
-            <label>Número WhatsApp (com DDI)</label>
-            <input type="text" id="cfg-wanum" placeholder="5535999999999">
-          </div>
-          <div class="cfg-fld">
-            <label>API Key Callmebot</label>
-            <input type="text" id="cfg-wakey" placeholder="Ex: 123456">
-          </div>
+          <div class="cfg-fld"><label>Número (com DDI)</label><input type="text" id="cfg-wanum" placeholder="5535999999999"></div>
+          <div class="cfg-fld"><label>API Key</label><input type="text" id="cfg-wakey" placeholder="123456"></div>
           <button class="cfg-save" onclick="saveCfgWA()">Salvar</button>
         </div>
         <div class="cfg-info">
-          <strong style="color:var(--warn)">⚠️ Número atualizado do bot:</strong><br><br>
-          <strong>Passo 1:</strong> Adicione <strong>+34 698 28 89 73</strong> na agenda como <em>CallMeBot</em><br>
-          <strong>Passo 2:</strong> Envie no WhatsApp para esse contato:<br>
-          <code>I allow callmebot to send me messages</code><br>
-          <strong>Passo 3:</strong> Aguarde a resposta com a <strong>API Key</strong> (até 2 min)<br>
-          <strong>Passo 4:</strong> Cole número e API Key acima e salve<br><br>
-          <em style="color:var(--txt2)">Número alternativo se não funcionar: <strong>+34 644 77 34 53</strong></em>
+          Envie <code>I allow callmebot to send me messages</code> para <strong>+34 698 28 89 73</strong> no WhatsApp e aguarde a API Key.
         </div>
         <div class="cfg-status" id="cfg-wa-status"></div>
       </div>
-      <div class="cfg-box" style="margin-top:12px">
-        <h4>🧪 Testar WhatsApp</h4>
+      <div class="cfg-box"><h4>🧪 Testar WhatsApp</h4>
         <div class="cfg-row">
-          <button class="cfg-save" onclick="testarWA()" style="width:auto">Enviar mensagem de teste</button>
+          <button class="cfg-save" onclick="testarWA()" style="width:auto">Enviar teste</button>
           <div class="cfg-status" id="cfg-test-status" style="display:block;margin-top:0;align-self:center"></div>
         </div>
       </div>
     </div>
-
-    <!-- POLLING -->
-    <div class="sec">Monitoramento em Tempo Real</div>
+    <div class="sec">Monitoramento</div>
     <div class="cfg-box">
-      <h4>🔔 Intervalo de verificação automática</h4>
+      <h4>🔔 Intervalo de verificação</h4>
       <div class="cfg-row">
-        <div class="cfg-fld">
-          <label>Verificar a cada (segundos)</label>
-          <input type="number" id="cfg-interval" value="30" min="10" max="300">
-        </div>
+        <div class="cfg-fld"><label>Verificar a cada (segundos)</label><input type="number" id="cfg-interval" value="30" min="10" max="300"></div>
         <button class="cfg-save" onclick="saveCfgPoll()">Salvar</button>
       </div>
-      <div class="cfg-info">
-        O painel verifica silenciosamente novas entregas no intervalo configurado.
-        O sino 🔔 pisca e um alerta aparece a cada nova entrega detectada.
-      </div>
-    </div>
-
-  </div>
-  <!-- ── CADASTROS ── -->
-  <div class="pane" id="pane-cad">
-
-    <div class="sec">Gerenciar Motoristas e Veículos</div>
-
-    <div style="background:rgba(74,144,217,.08);border:1px solid rgba(74,144,217,.2);border-radius:var(--r);padding:12px 16px;margin-bottom:20px;font-size:13px;color:#8ab4d9;line-height:1.6">
-      <strong style="color:var(--info)">ℹ️ Sincronização automática</strong><br>
-      Os cadastros são salvos localmente <em>e</em> sincronizados com a planilha Google Sheets.
-      O formulário dos motoristas usa sempre a lista atualizada aqui.
-    </div>
-
-    <div class="cad-cols">
-
-      <!-- MOTORISTAS -->
-      <div class="cad-card">
-        <div class="cad-head">
-          <span class="cad-ico">🧑‍✈️</span>
-          <h4>Motoristas</h4>
-          <span class="cad-count" id="mot-count">0</span>
-        </div>
-        <div class="cad-form">
-          <input class="cad-input" id="new-mot" placeholder="Nome completo do motorista"
-            maxlength="60" onkeydown="if(event.key==='Enter')addMotorista()">
-          <button class="cad-add" onclick="addMotorista()">+ Adicionar</button>
-        </div>
-        <div class="cad-errmsg" id="err-mot">Informe o nome do motorista</div>
-        <div class="cad-list" id="mot-list"></div>
-        <div class="cad-sync">
-          <div class="cad-sync-dot" id="mot-sync-dot"></div>
-          <span id="mot-sync-lbl">Aguardando...</span>
-        </div>
-      </div>
-
-      <!-- VEÍCULOS -->
-      <div class="cad-card">
-        <div class="cad-head">
-          <span class="cad-ico">🚛</span>
-          <h4>Veículos / Placas</h4>
-          <span class="cad-count" id="plc-count">0</span>
-        </div>
-        <div class="cad-form">
-          <input class="cad-input" id="new-plc" placeholder="Ex: ABC-1234"
-            maxlength="10" style="text-transform:uppercase"
-            oninput="this.value=this.value.toUpperCase()"
-            onkeydown="if(event.key==='Enter')addPlaca()">
-          <button class="cad-add" onclick="addPlaca()">+ Adicionar</button>
-        </div>
-        <div class="cad-errmsg" id="err-plc">Informe a placa do veículo</div>
-        <div class="cad-list" id="plc-list"></div>
-        <div class="cad-sync">
-          <div class="cad-sync-dot" id="plc-sync-dot"></div>
-          <span id="plc-sync-lbl">Aguardando...</span>
-        </div>
-      </div>
-
     </div>
   </div>
-
 </div><!-- /app -->
 
-<!-- MODAL DETALHE -->
+<!-- MODAL -->
 <div class="mover" id="mover" onclick="if(event.target===this)closeMod()">
   <div class="modal">
-    <div class="mhdr">
-      <h3>Detalhe da Entrega</h3>
-      <button class="mclose" onclick="closeMod()">✕</button>
-    </div>
+    <div class="mhdr"><h3>Detalhe da Entrega</h3><button class="mclose" onclick="closeMod()">✕</button></div>
     <div id="mbody"></div>
+    <div class="modal-footer">
+      <button class="mbtn-del" id="mbtn-del" onclick="excluirEntregaAtual()">🗑 Excluir esta entrega</button>
+      <button class="mbtn-close" onclick="closeMod()">Fechar</button>
+    </div>
   </div>
 </div>
 
 <script>
-// ══════════════════════════════════════════════════════════
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw7y8ATQkFlWYKwMytdo48rFnduGIPr-y36zQljjQgTzXBCnqb_mOIF-05XeOl6xN5sDw/exec';
-// ══════════════════════════════════════════════════════════
-
 const DEFAULT_PASS = '1234';
 function getPass(){ return localStorage.getItem('sj_pass') || DEFAULT_PASS; }
 function setPass(p){ localStorage.setItem('sj_pass', p); }
 
-// ─ NOTIFICAÇÕES — ESTADO ─────────────────────────────────
+// ─ NOTIFICAÇÕES ────────────────────────────────────────────
 let notifications = JSON.parse(localStorage.getItem('sj_notifs') || '[]');
 let lastKnownCount = parseInt(localStorage.getItem('sj_lastcount') || '0');
 let pollTimer = null;
 let pollInterval = parseInt(localStorage.getItem('sj_poll_interval') || '30');
-
 function saveNotifs(){ localStorage.setItem('sj_notifs', JSON.stringify(notifications)); }
 function savePollInterval(v){ localStorage.setItem('sj_poll_interval', v); }
 
-// ─ TOAST ─────────────────────────────────────────────────
 function showToast(title, msg, type='ora', duration=6000){
   const wrap = document.getElementById('toast-wrap');
   const ico = type==='ok'?'✅':type==='err'?'⚠️':type==='warn'?'🚨':'🔔';
   const t = document.createElement('div');
   t.className = 'toast' + (type!=='ora'?' t-'+type:'');
-  t.innerHTML = `<div class="toast-ico">${ico}</div>
-    <div class="toast-content">
-      <div class="toast-title">${title}</div>
-      <div class="toast-msg">${msg}</div>
-    </div>
-    <button class="toast-close" onclick="dismissToast(this.parentElement)">✕</button>`;
+  t.innerHTML = `<div class="toast-ico">${ico}</div><div class="toast-content"><div class="toast-title">${title}</div><div class="toast-msg">${msg}</div></div><button class="toast-close" onclick="dismissToast(this.parentElement)">✕</button>`;
   wrap.appendChild(t);
   requestAnimationFrame(()=>requestAnimationFrame(()=>t.classList.add('show')));
   if(duration>0) setTimeout(()=>dismissToast(t), duration);
-  return t;
 }
+function dismissToast(t){ t.classList.add('leaving'); setTimeout(()=>t.remove(), 350); }
 
-function dismissToast(t){
-  t.classList.add('leaving');
-  setTimeout(()=>t.remove(), 350);
-}
-
-// ─ GAVETA ─────────────────────────────────────────────────
-function toggleDrawer(){
-  const d = document.getElementById('notif-drawer');
-  const isOpen = d.classList.contains('open');
-  if(isOpen){ closeDrawer(); }
-  else {
-    d.classList.add('open');
-    document.getElementById('notif-overlay').classList.add('on');
-    renderDrawer();
-    // Marcar como lidas ao abrir
-    setTimeout(markAllRead, 1500);
-  }
-}
-function closeDrawer(){
-  document.getElementById('notif-drawer').classList.remove('open');
-  document.getElementById('notif-overlay').classList.remove('on');
-}
-
+function toggleDrawer(){ const d=document.getElementById('notif-drawer'); if(d.classList.contains('open')){closeDrawer();}else{d.classList.add('open');document.getElementById('notif-overlay').classList.add('on');renderDrawer();setTimeout(markAllRead,1500);} }
+function closeDrawer(){ document.getElementById('notif-drawer').classList.remove('open'); document.getElementById('notif-overlay').classList.remove('on'); }
 function renderDrawer(){
-  const list = document.getElementById('notif-list');
-  const unread = notifications.filter(n=>!n.read).length;
-  document.getElementById('nd-count').textContent = notifications.length;
-  if(!notifications.length){
-    list.innerHTML='<div class="notif-empty"><div class="neo">🔕</div><p>Nenhuma notificação ainda</p></div>';
-    return;
-  }
-  list.innerHTML = notifications.slice().reverse().map((n,i)=>{
-    const ri = notifications.length-1-i;
-    const stClass = n.status==='Normal'?'status-ok':n.status.includes('Divergente')?'status-div':'status-oco';
-    const ico = n.status==='Normal'?'✅':n.status.includes('Divergente')?'⚠️':'📋';
+  const list=document.getElementById('notif-list');
+  document.getElementById('nd-count').textContent=notifications.length;
+  if(!notifications.length){ list.innerHTML='<div class="notif-empty"><div class="neo">🔕</div><p>Nenhuma notificação</p></div>'; return; }
+  list.innerHTML=notifications.slice().reverse().map((n,i)=>{
+    const ri=notifications.length-1-i;
+    const stClass=n.status==='Normal'?'status-ok':n.status.includes('Divergente')?'status-div':'status-oco';
+    const ico=n.status==='Normal'?'✅':n.status.includes('Divergente')?'⚠️':'📋';
     return `<div class="nitem ${stClass} ${n.read?'':'unread'}" onclick="openNotif(${ri})">
-      <div class="nitem-head">
-        <div class="nitem-ico">${ico}</div>
-        <div class="nitem-title">NF ${n.nfNumero} — ${n.motorista}</div>
-        <div class="nitem-time">${n.time}</div>
-      </div>
-      <div class="nitem-body">
-        <strong>${n.placa}</strong> &nbsp;·&nbsp; R$ ${fmtN(n.nfValor)} &nbsp;·&nbsp; ${n.pagamentoNaEntrega==='Sim'?'Pago: '+n.tipoPagamento:'Sem pgto'}
-        ${n.ocorrencia?'<br>⚠️ '+n.ocorrencia:''}
-      </div>
-      <div class="nitem-status">${pill(n.status)}</div>
-    </div>`;
+      <div class="nitem-head"><div class="nitem-ico">${ico}</div><div class="nitem-title">NF ${n.nfNumero} — ${n.motorista}</div><div class="nitem-time">${n.time}</div></div>
+      <div class="nitem-body"><strong>${n.placa}</strong> · R$ ${fmtN(n.nfValor)} · ${n.pagamentoNaEntrega==='Sim'?'Pago: '+n.tipoPagamento:'Sem pgto'}</div>
+      <div class="nitem-status">${pill(n.status)}</div></div>`;
   }).join('');
 }
+function openNotif(i){ notifications[i].read=true; saveNotifs(); updateBadge(); closeDrawer(); const n=notifications[i]; showModal(n,-1); }
+function markAllRead(){ notifications.forEach(n=>n.read=true); saveNotifs(); updateBadge(); renderDrawer(); }
+function clearAllNotifs(){ if(!confirm('Limpar todas?'))return; notifications=[]; saveNotifs(); updateBadge(); renderDrawer(); }
+function updateBadge(){ const u=notifications.filter(n=>!n.read).length; const b=document.getElementById('notif-badge'); b.textContent=u>99?'99+':u; b.classList.toggle('show',u>0); document.getElementById('notif-btn').classList.toggle('has-new',u>0); }
 
-function openNotif(i){
-  notifications[i].read = true;
-  saveNotifs();
-  updateBadge();
-  closeDrawer();
-  // Abre o modal com os dados da notificação
-  const n = notifications[i];
-  document.getElementById('mbody').innerHTML =
-    mr('Data/Hora', n.time) +
-    mr('Motorista', n.motorista) +
-    mr('Placa', n.placa) +
-    mr('NF Número', n.nfNumero) +
-    mr('Valor NF', fmt(n.nfValor)) +
-    mr('Pgto na Entrega', n.pagamentoNaEntrega) +
-    (n.pagamentoNaEntrega==='Sim' ? mr('Tipo Pagamento', n.tipoPagamento||'—') : '') +
-    (n.pagamentoNaEntrega==='Sim' ? mr('Valor Recebido', fmt(n.valorRecebido)) : '') +
-    mr('Status', pill(n.status)) +
-    (n.ocorrencia ? mr('Ocorrência', n.ocorrencia) : '');
-  document.getElementById('mover').classList.add('on');
-}
-
-function markAllRead(){
-  notifications.forEach(n=>n.read=true);
-  saveNotifs(); updateBadge(); renderDrawer();
-}
-
-function clearAllNotifs(){
-  if(!confirm('Limpar todas as notificações?')) return;
-  notifications = [];
-  saveNotifs(); updateBadge(); renderDrawer();
-}
-
-function updateBadge(){
-  const unread = notifications.filter(n=>!n.read).length;
-  const badge = document.getElementById('notif-badge');
-  const btn = document.getElementById('notif-btn');
-  badge.textContent = unread > 99 ? '99+' : unread;
-  badge.classList.toggle('show', unread>0);
-  btn.classList.toggle('has-new', unread>0);
-}
-
-// ─ POLLING ────────────────────────────────────────────────
-function startPolling(){
-  stopPolling();
-  setPollStatus(true, 'Monitorando novas entregas (a cada '+pollInterval+'s)');
-  pollTimer = setInterval(pollCheck, pollInterval * 1000);
-  // Primeira verificação imediata
-  setTimeout(pollCheck, 2000);
-}
-
-function stopPolling(){
-  if(pollTimer){ clearInterval(pollTimer); pollTimer=null; }
-}
-
-function setPollStatus(active, label){
-  document.getElementById('poll-dot').className = 'poll-dot' + (active?'':' off');
-  document.getElementById('poll-label').textContent = label;
-}
-
+// ─ POLLING ─────────────────────────────────────────────────
+function startPolling(){ stopPolling(); setPollStatus(true,'Monitorando (a cada '+pollInterval+'s)'); pollTimer=setInterval(pollCheck,pollInterval*1000); setTimeout(pollCheck,2000); }
+function stopPolling(){ if(pollTimer){clearInterval(pollTimer);pollTimer=null;} }
+function setPollStatus(active,label){ document.getElementById('poll-dot').className='poll-dot'+(active?'':' off'); document.getElementById('poll-label').textContent=label; }
 async function pollCheck(){
-  if(SCRIPT_URL === 'SUA_URL_AQUI') return;
+  if(SCRIPT_URL==='SUA_URL_AQUI')return;
   try{
-    const r = await fetch(SCRIPT_URL + '?acao=listar');
-    const txt = await r.text();
-    let res;
-    try{ res = JSON.parse(txt); } catch(e){ return; }
-    const data = res.data || [];
-    const currentCount = data.length;
-
-    if(lastKnownCount > 0 && currentCount > lastKnownCount){
-      // Novas entregas detectadas!
-      const novas = data.slice(0, currentCount - lastKnownCount);
-      novas.forEach(entrega => adicionarNotificacao(entrega));
-
-      // Atualiza os dados na tela silenciosamente
-      allData = data;
-      filtData = [...data];
-      renderDash(data);
-      renderTable(filtData);
+    const r=await fetch(SCRIPT_URL+'?acao=listar');
+    const res=JSON.parse(await r.text());
+    const data=res.data||[];
+    const cur=data.length;
+    if(lastKnownCount>0&&cur>lastKnownCount){
+      data.slice(0,cur-lastKnownCount).forEach(e=>adicionarNotificacao(e));
+      allData=data; filtData=[...data]; renderDash(data); renderTable(filtData);
     }
-
-    if(lastKnownCount === 0 && currentCount > 0){
-      // Primeiro load — apenas registrar contagem, sem notificar
-      allData = data;
-      filtData = [...data];
-      renderDash(data);
-      renderTable(filtData);
-    }
-
-    lastKnownCount = currentCount;
-    localStorage.setItem('sj_lastcount', currentCount);
-    setPollStatus(true, 'Última verificação: ' + new Date().toLocaleTimeString('pt-BR'));
-  } catch(e){
-    setPollStatus(false, 'Erro na verificação — tentando novamente...');
-  }
+    if(lastKnownCount===0&&cur>0){ allData=data; filtData=[...data]; renderDash(data); renderTable(filtData); }
+    lastKnownCount=cur; localStorage.setItem('sj_lastcount',cur);
+    setPollStatus(true,'Última verificação: '+new Date().toLocaleTimeString('pt-BR'));
+  }catch(e){ setPollStatus(false,'Erro — tentando...'); }
+}
+function adicionarNotificacao(e){
+  const n={id:Date.now()+Math.random(),time:e.data||new Date().toLocaleString('pt-BR'),motorista:e.motorista||'—',placa:e.placa||'—',nfNumero:e.nfNumero||'—',nfValor:e.nfValor||0,pagamentoNaEntrega:e.pagamentoNaEntrega||'Não',tipoPagamento:e.tipoPagamento||'—',valorRecebido:e.valorRecebido||0,ocorrencia:e.ocorrencia||'',status:e.status||'Normal',read:false};
+  notifications.push(n); if(notifications.length>100)notifications=notifications.slice(-100);
+  saveNotifs(); updateBadge();
+  const isDiv=n.status.includes('Divergente'),isOco=n.status.includes('Ocorrência');
+  showToast((isDiv?'⚠️':isOco?'📋':'✅')+' Nova entrega — '+n.motorista,'NF '+n.nfNumero+' · '+n.placa+' · R$ '+fmtN(n.nfValor),isDiv?'err':isOco?'warn':'ok',8000);
+  try{const ctx=new(window.AudioContext||window.webkitAudioContext)();const o=ctx.createOscillator();const g=ctx.createGain();o.connect(g);g.connect(ctx.destination);o.frequency.value=880;g.gain.setValueAtTime(.3,ctx.currentTime);g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+.4);o.start(ctx.currentTime);o.stop(ctx.currentTime+.4);}catch(e){}
 }
 
-function adicionarNotificacao(entrega){
-  const notif = {
-    id: Date.now() + Math.random(),
-    time: entrega.data || new Date().toLocaleString('pt-BR'),
-    motorista: entrega.motorista || '—',
-    placa: entrega.placa || '—',
-    nfNumero: entrega.nfNumero || '—',
-    nfValor: entrega.nfValor || 0,
-    pagamentoNaEntrega: entrega.pagamentoNaEntrega || 'Não',
-    tipoPagamento: entrega.tipoPagamento || '—',
-    valorRecebido: entrega.valorRecebido || 0,
-    ocorrencia: entrega.ocorrencia || '',
-    status: entrega.status || 'Normal',
-    read: false
-  };
+// ─ EXCLUIR ENTREGA ─────────────────────────────────────────
+let currentModalIdx = -1;
+let deletedHistory = JSON.parse(localStorage.getItem('sj_deleted') || '[]');
+function saveDeletedHistory(){ localStorage.setItem('sj_deleted', JSON.stringify(deletedHistory)); }
 
-  notifications.push(notif);
-  // Manter máximo 100 notificações
-  if(notifications.length > 100) notifications = notifications.slice(-100);
-  saveNotifs();
-  updateBadge();
+function excluirEntregaAtual(){
+  if(currentModalIdx < 0) return;
+  const r = filtData[currentModalIdx];
+  if(!r) return;
+  if(!confirm('Excluir a entrega da NF ' + r.nfNumero + ' de ' + r.motorista + '?\n\nEsta ação move o registro para o histórico.')) return;
 
-  // Toast na tela
-  const isDiv = notif.status.includes('Divergente');
-  const isOco = notif.status.includes('Ocorrência');
-  const tipo = isDiv ? 'err' : isOco ? 'warn' : 'ok';
-  const ico = isDiv ? '⚠️' : isOco ? '📋' : '✅';
-  showToast(
-    ico + ' Nova entrega — ' + notif.motorista,
-    'NF ' + notif.nfNumero + ' · ' + notif.placa + ' · R$ ' + fmtN(notif.nfValor) + (notif.ocorrencia ? '<br>⚠️ '+notif.ocorrencia : ''),
-    tipo,
-    8000
-  );
+  // Salva no histórico local com timestamp de exclusão
+  deletedHistory.unshift({
+    ...r,
+    deletedAt: new Date().toLocaleString('pt-BR'),
+    deletedAtISO: new Date().toISOString()
+  });
+  // Mantém máximo 200 registros no histórico
+  if(deletedHistory.length > 200) deletedHistory = deletedHistory.slice(0, 200);
+  saveDeletedHistory();
 
-  // Som de notificação (beep simples via Web Audio API)
+  // Remove dos dados ativos
+  const idxInAll = allData.findIndex(x => x.nfNumero===r.nfNumero && x.motorista===r.motorista && x.data===r.data);
+  if(idxInAll >= 0) allData.splice(idxInAll, 1);
+  filtData = filtData.filter((_,i) => i !== currentModalIdx);
+  lastKnownCount = allData.length;
+  localStorage.setItem('sj_lastcount', lastKnownCount);
+
+  closeMod();
+  renderDash(allData);
+  renderTable(filtData);
+  renderHistorico();
+  showToast('🗑 Entrega excluída', 'NF '+r.nfNumero+' movida para o histórico', 'warn', 4000);
+
+  // Envia exclusão para o Apps Script (remove da planilha)
+  excluirNaplanilha(r);
+}
+
+async function excluirNaplanilha(r){
+  if(SCRIPT_URL==='SUA_URL_AQUI') return;
   try{
-    const ctx = new (window.AudioContext || window.webkitAudioContext)();
-    const osc = ctx.createOscillator();
-    const gain = ctx.createGain();
-    osc.connect(gain); gain.connect(ctx.destination);
-    osc.frequency.value = 880;
-    gain.gain.setValueAtTime(0.3, ctx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4);
-    osc.start(ctx.currentTime);
-    osc.stop(ctx.currentTime + 0.4);
-  } catch(e){}
-}
-
-// ─ CANAL DE NOTIFICAÇÃO ──────────────────────────────────
-let canalAtivo = localStorage.getItem('sj_canal') || 'telegram';
-
-function setCanalNotif(canal){
-  canalAtivo = canal;
-  localStorage.setItem('sj_canal', canal);
-  document.getElementById('canal-telegram').classList.toggle('active', canal==='telegram');
-  document.getElementById('canal-whatsapp').classList.toggle('active', canal==='whatsapp');
-  document.getElementById('cfg-telegram-box').style.display = canal==='telegram'?'block':'none';
-  document.getElementById('cfg-whatsapp-box').style.display = canal==='whatsapp'?'block':'none';
-}
-
-// ─ TELEGRAM ──────────────────────────────────────────────
-function saveCfgTelegram(){
-  localStorage.setItem('sj_tg_token',  document.getElementById('cfg-tg-token').value.trim());
-  localStorage.setItem('sj_tg_chatid', document.getElementById('cfg-tg-chatid').value.trim());
-  const s = document.getElementById('cfg-tg-status');
-  s.textContent = '✅ Configurações do Telegram salvas!';
-  s.className = 'cfg-status show ok';
-  setTimeout(()=>s.classList.remove('show'), 3000);
-}
-
-async function testarTelegram(){
-  const token  = localStorage.getItem('sj_tg_token');
-  const chatid = localStorage.getItem('sj_tg_chatid');
-  const s = document.getElementById('cfg-tg-test');
-  if(!token||!chatid){ s.textContent='❌ Configure o Token e Chat ID primeiro'; s.className='cfg-status show err'; return; }
-  s.textContent='⏳ Enviando...'; s.className='cfg-status show';
-  try{
-    const resp = await fetch(`https://api.telegram.org/bot${token}/sendMessage`,{
-      method:'POST', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({chat_id:chatid, text:'🧪 *Teste — São João Ferro e Aço*\nSistema de entregas funcionando!', parse_mode:'Markdown'})
+    await fetch(SCRIPT_URL, {
+      method:'POST',
+      headers:{'Content-Type':'text/plain'},
+      body: JSON.stringify({acao:'excluirEntrega', nfNumero:r.nfNumero, motorista:r.motorista, data:r.dataISO||''})
     });
-    const r = await resp.json();
-    if(r.ok){ s.textContent='✅ Mensagem enviada! Verifique o Telegram.'; s.className='cfg-status show ok'; }
-    else{ s.textContent='❌ Erro: '+(r.description||'Verifique Token e Chat ID'); s.className='cfg-status show err'; }
-  }catch(e){ s.textContent='❌ '+e.message; s.className='cfg-status show err'; }
+  }catch(e){ console.log('Erro ao excluir na planilha:', e); }
 }
 
-// ─ WHATSAPP (CALLMEBOT) ───────────────────────────────────
-function saveCfgWA(){
-  localStorage.setItem('sj_wa_num', document.getElementById('cfg-wanum').value.trim());
-  localStorage.setItem('sj_wa_key', document.getElementById('cfg-wakey').value.trim());
-  const s = document.getElementById('cfg-wa-status');
-  s.textContent='✅ Configurações salvas!'; s.className='cfg-status show ok';
-  setTimeout(()=>s.classList.remove('show'), 3000);
+function renderHistorico(){
+  const el = document.getElementById('hist-list');
+  // Filtra itens com mais de 30 dias e atualiza
+  const limite = Date.now() - 30*24*60*60*1000;
+  deletedHistory = deletedHistory.filter(r => new Date(r.deletedAtISO).getTime() > limite);
+  saveDeletedHistory();
+
+  if(!deletedHistory.length){
+    el.innerHTML='<div class="empty"><div class="eico">🗃</div><p>Nenhuma entrega excluída nos últimos 30 dias</p></div>';
+    return;
+  }
+  el.innerHTML = deletedHistory.map((r,i)=>`
+    <div class="hist-item">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+        <div>
+          <div style="font-size:13px;font-weight:700">${r.motorista} · NF ${r.nfNumero} · ${fmt(r.nfValor)}</div>
+          <div style="font-size:11px;color:var(--txt2);margin-top:3px">Entrega: ${r.data||'—'} · Excluído em: ${r.deletedAt}</div>
+          ${r.ocorrencia?`<div style="font-size:11px;color:var(--warn);margin-top:2px">⚠️ ${r.ocorrencia}</div>`:''}
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;flex-shrink:0">
+          ${pill(r.status)}
+          <div class="hist-badge">Excluído</div>
+        </div>
+      </div>
+    </div>`).join('');
 }
 
-async function testarWA(){
-  const num = localStorage.getItem('sj_wa_num');
-  const key = localStorage.getItem('sj_wa_key');
-  const s = document.getElementById('cfg-test-status');
-  if(!num||!key){ s.textContent='❌ Configure o número e API Key primeiro'; s.className='cfg-status show err'; return; }
-  s.textContent='⏳ Enviando...'; s.className='cfg-status show';
+function limparHistorico(){
+  if(!confirm('Limpar todo o histórico de excluídos?')) return;
+  deletedHistory = [];
+  saveDeletedHistory();
+  renderHistorico();
+  showToast('🗑 Histórico limpo', 'Todos os registros excluídos foram removidos', 'warn', 3000);
+}
+
+// ─ CANAL DE NOTIFICAÇÃO ─────────────────────────────────────
+let canalAtivo = localStorage.getItem('sj_canal') || 'telegram';
+function setCanalNotif(canal){
+  canalAtivo=canal; localStorage.setItem('sj_canal',canal);
+  document.getElementById('canal-telegram').classList.toggle('active',canal==='telegram');
+  document.getElementById('canal-whatsapp').classList.toggle('active',canal==='whatsapp');
+  document.getElementById('cfg-telegram-box').style.display=canal==='telegram'?'block':'none';
+  document.getElementById('cfg-whatsapp-box').style.display=canal==='whatsapp'?'block':'none';
+}
+function saveCfgTelegram(){ localStorage.setItem('sj_tg_token',document.getElementById('cfg-tg-token').value.trim()); localStorage.setItem('sj_tg_chatid',document.getElementById('cfg-tg-chatid').value.trim()); const s=document.getElementById('cfg-tg-status'); s.textContent='✅ Salvo!'; s.className='cfg-status show ok'; setTimeout(()=>s.classList.remove('show'),3000); }
+async function testarTelegram(){
+  const token=localStorage.getItem('sj_tg_token'),chatid=localStorage.getItem('sj_tg_chatid'),s=document.getElementById('cfg-tg-test');
+  if(!token||!chatid){s.textContent='❌ Configure Token e Chat ID';s.className='cfg-status show err';return;}
+  s.textContent='⏳ Enviando...';s.className='cfg-status show';
   try{
-    const msg = encodeURIComponent('🧪 Teste — São João Ferro e Aço\nSistema funcionando!');
-    await fetch(`https://api.callmebot.com/whatsapp.php?phone=${num}&text=${msg}&apikey=${key}`,{mode:'no-cors'});
-    s.textContent='✅ Requisição enviada! Verifique o WhatsApp (1-2 min).'; s.className='cfg-status show ok';
-  }catch(e){ s.textContent='❌ '+e.message; s.className='cfg-status show err'; }
+    const r=await fetch(`https://api.telegram.org/bot${token}/sendMessage`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chat_id:chatid,text:'🧪 Teste — São João Ferro e Aço',parse_mode:'Markdown'})});
+    const res=await r.json();
+    if(res.ok){s.textContent='✅ Enviado!';s.className='cfg-status show ok';}
+    else{s.textContent='❌ '+res.description;s.className='cfg-status show err';}
+  }catch(e){s.textContent='❌ '+e.message;s.className='cfg-status show err';}
 }
-
-function saveCfgPoll(){
-  const v=parseInt(document.getElementById('cfg-interval').value)||30;
-  pollInterval=Math.max(10,Math.min(300,v));
-  savePollInterval(pollInterval); startPolling();
-  showToast('✓ Configuração salva','Verificando a cada '+pollInterval+' segundos','ok',4000);
+function saveCfgWA(){ localStorage.setItem('sj_wa_num',document.getElementById('cfg-wanum').value.trim()); localStorage.setItem('sj_wa_key',document.getElementById('cfg-wakey').value.trim()); const s=document.getElementById('cfg-wa-status'); s.textContent='✅ Salvo!'; s.className='cfg-status show ok'; setTimeout(()=>s.classList.remove('show'),3000); }
+async function testarWA(){
+  const num=localStorage.getItem('sj_wa_num'),key=localStorage.getItem('sj_wa_key'),s=document.getElementById('cfg-test-status');
+  if(!num||!key){s.textContent='❌ Configure número e API Key';s.className='cfg-status show err';return;}
+  s.textContent='⏳ Enviando...';s.className='cfg-status show';
+  try{ await fetch(`https://api.callmebot.com/whatsapp.php?phone=${num}&text=Teste&apikey=${key}`,{mode:'no-cors'}); s.textContent='✅ Enviado!';s.className='cfg-status show ok'; }
+  catch(e){s.textContent='❌ '+e.message;s.className='cfg-status show err';}
 }
-
+function saveCfgPoll(){ const v=parseInt(document.getElementById('cfg-interval').value)||30; pollInterval=Math.max(10,Math.min(300,v)); savePollInterval(pollInterval); startPolling(); showToast('✓ Salvo','Verificando a cada '+pollInterval+'s','ok',4000); }
 function loadCfgWA(){
-  document.getElementById('cfg-tg-token').value  = localStorage.getItem('sj_tg_token')  || '';
-  document.getElementById('cfg-tg-chatid').value = localStorage.getItem('sj_tg_chatid') || '';
-  document.getElementById('cfg-wanum').value = localStorage.getItem('sj_wa_num') || '';
-  document.getElementById('cfg-wakey').value = localStorage.getItem('sj_wa_key') || '';
-  document.getElementById('cfg-interval').value = pollInterval;
+  document.getElementById('cfg-tg-token').value=localStorage.getItem('sj_tg_token')||'';
+  document.getElementById('cfg-tg-chatid').value=localStorage.getItem('sj_tg_chatid')||'';
+  document.getElementById('cfg-wanum').value=localStorage.getItem('sj_wa_num')||'';
+  document.getElementById('cfg-wakey').value=localStorage.getItem('sj_wa_key')||'';
+  document.getElementById('cfg-interval').value=pollInterval;
   setCanalNotif(canalAtivo);
 }
-// ─ LOGIN / AUTH ───────────────────────────────────────────
-function goTo(id){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  ['lerr','cerr','cok'].forEach(i=>document.getElementById(i).classList.remove('show'));
-}
 
+// ─ AUTH ─────────────────────────────────────────────────────
+function goTo(id){ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active')); document.getElementById(id).classList.add('active'); ['lerr','cerr','cok'].forEach(i=>document.getElementById(i).classList.remove('show')); }
 function doLogin(){
-  const u = document.getElementById('lu').value;
-  const p = document.getElementById('lp').value;
-  if(u==='Gerencial' && p===getPass()){
+  const u=document.getElementById('lu').value,p=document.getElementById('lp').value;
+  if(u==='Gerencial'&&p===getPass()){
     document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
     document.getElementById('app').style.display='flex';
     document.getElementById('uname').textContent='Bem-vindo, '+u;
-    updateBadge();
-    loadData();
-    startPolling();
-    loadCfgWA();
-  } else {
+    updateBadge(); loadData(); startPolling(); loadCfgWA();
+  }else{
     document.getElementById('lp').classList.add('inv');
     document.getElementById('lerr').classList.add('show');
-    setTimeout(()=>document.getElementById('lp').classList.remove('inv'), 2000);
+    setTimeout(()=>document.getElementById('lp').classList.remove('inv'),2000);
   }
 }
-
-function doLogout(){
-  stopPolling();
-  document.getElementById('app').style.display='none';
-  document.getElementById('lp').value='';
-  goTo('scr-login');
-}
-
+function doLogout(){ stopPolling(); document.getElementById('app').style.display='none'; document.getElementById('lp').value=''; goTo('scr-login'); }
 function chkStr(v){
-  let s=0;
-  if(v.length>=8)s++; if(/[A-Z]/.test(v))s++; if(/[0-9]/.test(v))s++; if(/[^A-Za-z0-9]/.test(v))s++;
-  const clrs=['#e05555','#f0b840','#f0b840','#4cba7a'];
-  const lbls=['Fraca','Razoável','Boa','Forte'];
+  let s=0; if(v.length>=8)s++; if(/[A-Z]/.test(v))s++; if(/[0-9]/.test(v))s++; if(/[^A-Za-z0-9]/.test(v))s++;
+  const clrs=['#e05555','#f0b840','#f0b840','#4cba7a'],lbls=['Fraca','Razoável','Boa','Forte'];
   document.getElementById('sf').style.cssText=`width:${s*25}%;background:${clrs[s-1]||'#333'}`;
   document.getElementById('sl').textContent=s>0?lbls[s-1]:'';
 }
-
 function doChangePwd(){
-  const u=document.getElementById('cu').value.trim();
-  const c=document.getElementById('cc').value;
-  const n=document.getElementById('cn').value;
-  const f=document.getElementById('cf').value;
-  const errEl=document.getElementById('cerr');
-  const okEl=document.getElementById('cok');
-  errEl.classList.remove('show'); okEl.classList.remove('show');
+  const u=document.getElementById('cu').value,c=document.getElementById('cc').value,n=document.getElementById('cn').value,f=document.getElementById('cf').value;
+  const errEl=document.getElementById('cerr'),okEl=document.getElementById('cok');
+  errEl.classList.remove('show');okEl.classList.remove('show');
   if(u!=='Gerencial'){errEl.textContent='Usuário inválido';errEl.classList.add('show');return;}
   if(c!==getPass()){errEl.textContent='Senha atual incorreta';errEl.classList.add('show');return;}
-  if(n.length<8){errEl.textContent='Nova senha deve ter ao menos 8 caracteres';errEl.classList.add('show');return;}
-  if(n!==f){errEl.textContent='As senhas não coincidem';errEl.classList.add('show');return;}
-  setPass(n); okEl.classList.add('show');
-  setTimeout(()=>goTo('scr-login'), 2200);
+  if(n.length<8){errEl.textContent='Mínimo 8 caracteres';errEl.classList.add('show');return;}
+  if(n!==f){errEl.textContent='Senhas não coincidem';errEl.classList.add('show');return;}
+  setPass(n);okEl.classList.add('show');setTimeout(()=>goTo('scr-login'),2200);
 }
 
-// ─ TABS ───────────────────────────────────────────────────
+// ─ TABS ─────────────────────────────────────────────────────
 function showPane(id,el){
   document.querySelectorAll('.pane').forEach(p=>p.classList.remove('on'));
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
   document.getElementById('pane-'+id).classList.add('on');
   el.classList.add('on');
-  // Atualiza filtro de motoristas ao abrir aba Entregas
   if(id==='list') syncFiltroMotoristas();
+  if(id==='hist') renderHistorico();
 }
 
-// ─ DADOS ──────────────────────────────────────────────────
+// ─ DADOS ─────────────────────────────────────────────────────
 let allData=[], filtData=[], curPg=1;
 const PER=20;
-
 async function loadData(){
   showLoad('Carregando dados...');
   try{
     const r=await fetch(SCRIPT_URL+'?acao=listar');
-    const txt=await r.text();
-    let res; try{res=JSON.parse(txt);}catch(e){res={ok:false,data:[]};}
-    allData=res.data||[];
-    filtData=[...allData];
-    lastKnownCount=allData.length;
-    localStorage.setItem('sj_lastcount', lastKnownCount);
+    const res=JSON.parse(await r.text());
+    allData=res.data||[]; filtData=[...allData];
+    lastKnownCount=allData.length; localStorage.setItem('sj_lastcount',lastKnownCount);
     renderDash(allData); renderTable(filtData);
-  }catch(e){ allData=[]; filtData=[]; renderDash([]); renderTable([]); }
-  finally{ hideLoad(); }
+  }catch(e){allData=[];filtData=[];renderDash([]);renderTable([]);}
+  finally{hideLoad();}
 }
-
 function fmt(v){return'R$ '+(parseFloat(v)||0).toLocaleString('pt-BR',{minimumFractionDigits:2});}
 function fmtN(v){return(parseFloat(v)||0).toLocaleString('pt-BR',{minimumFractionDigits:2});}
 
-// ─ DASHBOARD ──────────────────────────────────────────────
+// ─ DASHBOARD + GRÁFICOS ──────────────────────────────────────
 function renderDash(d){
   const fat=d.reduce((a,r)=>a+(parseFloat(r.nfValor)||0),0);
   const rec=d.reduce((a,r)=>a+(parseFloat(r.valorRecebido)||0),0);
@@ -1050,23 +829,105 @@ function renderDash(d){
   document.getElementById('k-dif').textContent=fmt(Math.abs(fat-rec));
   document.getElementById('k-div').textContent=ndiv;
   document.getElementById('k-oco').textContent=noco;
-  const mots = motoristas.length ? motoristas : ['Rogério','Roni','Alexander','Rafael','Jefferson'];
+  document.getElementById('k-div-pct').textContent=d.length?Math.round(ndiv/d.length*100)+'% do total':'';
+  document.getElementById('k-oco-pct').textContent=d.length?Math.round(noco/d.length*100)+'% do total':'';
+
+  const mots=motoristas.length?motoristas:['Rogério','Roni','Alexander','Rafael','Jefferson'];
+
+  // Tabela resumo
   document.getElementById('otbody').innerHTML=mots.map(m=>{
     const rs=d.filter(r=>r.motorista===m); if(!rs.length)return'';
+    const mfat=rs.reduce((a,r)=>a+(parseFloat(r.nfValor)||0),0);
+    const mrec=rs.reduce((a,r)=>a+(parseFloat(r.valorRecebido)||0),0);
     const dv=rs.filter(r=>(r.status||'').includes('Divergente')).length;
     const ov=rs.filter(r=>(r.status||'').includes('Ocorrência')).length;
-    const nv=rs.filter(r=>r.status==='Normal').length;
-    return`<tr><td><strong>${m}</strong></td><td>${rs.length}</td>
-      <td style="color:${dv?'var(--err)':'var(--txt2)'}">${dv}</td>
-      <td style="color:${ov?'var(--warn)':'var(--txt2)'}">${ov}</td>
-      <td style="color:var(--ok)">${nv}</td></tr>`;
-  }).join('')||'<tr><td colspan="5" style="text-align:center;color:var(--txt2);padding:24px">Sem dados</td></tr>';
+    return`<tr><td><strong>${m}</strong></td><td>${rs.length}</td><td>${fmt(mfat)}</td><td>${fmt(mrec)}</td>
+      <td style="color:${dv?'var(--err)':'var(--txt2)}">${dv}</td>
+      <td style="color:${ov?'var(--warn)':'var(--txt2)}">${ov}</td></tr>`;
+  }).join('')||'<tr><td colspan="6" style="text-align:center;color:var(--txt2);padding:24px">Sem dados</td></tr>';
+
+  // Gráfico barras — motoristas
+  const maxMot=Math.max(...mots.map(m=>d.filter(r=>r.motorista===m).length),1);
+  document.getElementById('chart-mots').innerHTML=mots.map(m=>{
+    const n=d.filter(r=>r.motorista===m).length;
+    const pct=Math.round(n/maxMot*100);
+    const fname=m.split(' ')[0];
+    return`<div class="bar-row"><div class="bar-label">${fname}</div>
+      <div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:var(--ora)"><span class="bar-val">${n}</span></div></div></div>`;
+  }).join('');
+
+  // Donut — status
+  const norm=d.filter(r=>!r.status||r.status==='Normal').length;
+  drawDonut([
+    {label:'Normal',val:norm,color:'#4cba7a'},
+    {label:'Divergente',val:ndiv,color:'#e05555'},
+    {label:'Ocorrência',val:noco,color:'#f0b840'},
+  ], d.length);
+
+  // Tipos de pagamento (barras horizontais coloridas)
+  const tipos={};
+  d.filter(r=>r.pagamentoNaEntrega==='Sim').forEach(r=>{
+    (r.tipoPagamento||'Outros').split(',').forEach(t=>{const k=t.trim();tipos[k]=(tipos[k]||0)+1;});
+  });
+  const tipoColors={'Dinheiro':'#4cba7a','PIX':'#4a90d9','Cheque':'#f0b840','Cartão Débito':'#E8621A','Cartão Crédito':'#e05555','Boleto':'#888'};
+  const tipoTotal=Object.values(tipos).reduce((a,b)=>a+b,0)||1;
+  const barHtml=Object.entries(tipos).length?
+    `<div class="pgto-bars">${Object.entries(tipos).map(([k,v])=>`<div class="pgto-bar" style="flex:${v};background:${tipoColors[k]||'#888'}" title="${k}: ${v}">${v>1?k.replace('Cartão ',''):''}  </div>`).join('')}</div>
+     <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:10px">${Object.entries(tipos).map(([k,v])=>`<div style="display:flex;align-items:center;gap:5px;font-size:11px"><div style="width:8px;height:8px;border-radius:50%;background:${tipoColors[k]||'#888'}"></div><span style="color:var(--txt2)">${k}</span><strong>${v}</strong></div>`).join('')}</div>`:
+    '<div style="color:var(--txt2);font-size:13px;text-align:center;padding:20px">Nenhum pagamento registrado</div>';
+  document.getElementById('pgto-chart').innerHTML=barHtml;
+
+  // Últimos 7 dias
+  const days7=[]; const now=new Date();
+  for(let i=6;i>=0;i--){ const dt=new Date(now); dt.setDate(dt.getDate()-i); days7.push(dt.toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'})); }
+  const countDays=days7.map(day=>d.filter(r=>r.data&&r.data.startsWith(day.split('/').reverse().join('/'))||r.data&&r.data.startsWith(day)).length);
+  // Try matching dd/MM
+  const countDays2=days7.map(day=>d.filter(r=>(r.data||'').includes(day)).length);
+  const maxDay=Math.max(...countDays2,1);
+  document.getElementById('chart-days').innerHTML=days7.map((day,i)=>{
+    const n=countDays2[i]; const pct=Math.round(n/maxDay*100);
+    return`<div class="bar-row"><div class="bar-label">${day}</div>
+      <div class="bar-track"><div class="bar-fill" style="width:${pct||2}%;background:var(--info)"><span class="bar-val">${n||''}</span></div></div></div>`;
+  }).join('');
+
+  // Sparklines
+  drawSparkline('spark-tot', countDays2);
+  drawSparkline('spark-fat', days7.map(day=>d.filter(r=>(r.data||'').includes(day)).reduce((a,r)=>a+(parseFloat(r.nfValor)||0),0)));
 }
 
-// ─ TABELA ─────────────────────────────────────────────────
+function drawDonut(data, total){
+  const canvas=document.getElementById('donut-canvas');
+  if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  ctx.clearRect(0,0,110,110);
+  if(!total){ ctx.beginPath(); ctx.arc(55,55,40,0,Math.PI*2); ctx.strokeStyle='#2e2e2e'; ctx.lineWidth=14; ctx.stroke(); return; }
+  let start=-Math.PI/2;
+  data.forEach(s=>{
+    if(!s.val)return;
+    const angle=(s.val/total)*Math.PI*2;
+    ctx.beginPath(); ctx.arc(55,55,40,start,start+angle); ctx.strokeStyle=s.color; ctx.lineWidth=14; ctx.stroke();
+    start+=angle;
+  });
+  ctx.fillStyle='var(--txt)'; ctx.font='bold 16px Roboto Condensed,sans-serif'; ctx.textAlign='center'; ctx.textBaseline='middle';
+  ctx.fillText(total, 55, 52);
+  ctx.font='11px Roboto,sans-serif'; ctx.fillStyle='#888'; ctx.fillText('total',55,68);
+  document.getElementById('donut-legend').innerHTML=data.map(s=>`
+    <div class="dl-item"><div class="dl-dot" style="background:${s.color}"></div>
+    <span class="dl-label">${s.label}</span><span class="dl-val">${s.val}</span></div>`).join('');
+}
+
+function drawSparkline(id, vals){
+  const el=document.getElementById(id); if(!el)return;
+  if(!vals.length||Math.max(...vals)===0)return;
+  const max=Math.max(...vals); const w=60,h=30;
+  const pts=vals.map((v,i)=>{const x=i/(vals.length-1||1)*w; const y=h-(v/max)*(h-4)-2; return `${x},${y}`;}).join(' ');
+  el.setAttribute('points',pts);
+}
+
+// ─ TABELA ────────────────────────────────────────────────────
 function pill(s){
   if(!s||s==='Normal')return'<span class="pill p-ok">Normal</span>';
-  if(s.includes('Divergente')&&s.includes('Ocorrência'))return'<span class="pill p-bth">Div+Ocor</span>';
+  if(s.includes('Divergente')&&s.includes('Ocorrência'))return'<span class="pill p-div">Div+Ocor</span>';
   if(s.includes('Divergente'))return'<span class="pill p-div">Divergente</span>';
   if(s.includes('Ocorrência'))return'<span class="pill p-oco">Com Ocorrência</span>';
   return`<span class="pill p-ok">${s}</span>`;
@@ -1075,12 +936,14 @@ function renderTable(d){ curPg=1; updPag(d); renderPg(d); }
 function renderPg(d){
   const tb=document.getElementById('tbody');
   const sl=d.slice((curPg-1)*PER,curPg*PER);
-  if(!sl.length){ tb.innerHTML='<tr><td colspan="7"><div class="empty"><div class="eico">📭</div><p>Nenhuma entrega encontrada</p></div></td></tr>'; return; }
+  if(!sl.length){ tb.innerHTML='<tr><td colspan="8"><div class="empty"><div class="eico">📭</div><p>Nenhuma entrega</p></div></td></tr>'; return; }
   tb.innerHTML=sl.map((r,i)=>`<tr onclick="openMod(${(curPg-1)*PER+i})">
     <td>${r.data||'—'}</td><td><strong>${r.motorista||'—'}</strong></td>
     <td>${r.placa||'—'}</td><td>${r.nfNumero||'—'}</td>
     <td>${fmt(r.nfValor)}</td><td>${r.pagamentoNaEntrega||'—'}</td>
-    <td>${pill(r.status)}</td></tr>`).join('');
+    <td>${pill(r.status)}</td>
+    <td><button class="btn-del-row" onclick="event.stopPropagation();delRow(${(curPg-1)*PER+i})" title="Excluir">🗑</button></td>
+  </tr>`).join('');
 }
 function updPag(d){
   const tot=d.length,pgs=Math.ceil(tot/PER)||1;
@@ -1088,34 +951,31 @@ function updPag(d){
   document.getElementById('pg-p').disabled=curPg<=1;
   document.getElementById('pg-n').disabled=curPg>=pgs;
 }
-function chgPg(dir){
-  const pgs=Math.ceil(filtData.length/PER)||1;
-  curPg=Math.max(1,Math.min(pgs,curPg+dir));
-  updPag(filtData); renderPg(filtData);
+function chgPg(dir){ const pgs=Math.ceil(filtData.length/PER)||1; curPg=Math.max(1,Math.min(pgs,curPg+dir)); updPag(filtData); renderPg(filtData); }
+
+function delRow(i){
+  currentModalIdx=i;
+  excluirEntregaAtual();
 }
 
-// ─ FILTROS ────────────────────────────────────────────────
+// ─ FILTROS ──────────────────────────────────────────────────
 function applyFil(){
-  const di=document.getElementById('f-di').value, df=document.getElementById('f-df').value;
-  const mot=document.getElementById('f-mot').value, sta=document.getElementById('f-sta').value;
+  const di=document.getElementById('f-di').value,df=document.getElementById('f-df').value;
+  const mot=document.getElementById('f-mot').value,sta=document.getElementById('f-sta').value;
   filtData=allData.filter(r=>{
     if(mot&&r.motorista!==mot)return false;
     if(sta&&!(r.status||'').includes(sta))return false;
     if(di&&r.dataISO&&r.dataISO<di)return false;
     if(df&&r.dataISO&&r.dataISO>df)return false;
     return true;
-  });
-  renderTable(filtData);
+  }); renderTable(filtData);
 }
-function clearFil(){
-  ['f-di','f-df'].forEach(id=>document.getElementById(id).value='');
-  ['f-mot','f-sta'].forEach(id=>document.getElementById(id).value='');
-  filtData=[...allData]; renderTable(filtData);
-}
+function clearFil(){ ['f-di','f-df'].forEach(id=>document.getElementById(id).value=''); ['f-mot','f-sta'].forEach(id=>document.getElementById(id).value=''); filtData=[...allData]; renderTable(filtData); }
 
-// ─ MODAL ──────────────────────────────────────────────────
+// ─ MODAL ─────────────────────────────────────────────────────
 function openMod(i){
   const r=filtData[i]; if(!r)return;
+  currentModalIdx=i;
   const imgHtml=r.fotoUrl?`<img class="mimg" src="${r.fotoUrl}" alt="Comprovante">`:'';
   document.getElementById('mbody').innerHTML=
     mr('Data/Hora',r.data||'—')+mr('Motorista',r.motorista||'—')+mr('Placa',r.placa||'—')+
@@ -1127,233 +987,63 @@ function openMod(i){
   document.getElementById('mover').classList.add('on');
 }
 function mr(k,v){return`<div class="mrow"><span class="mk">${k}</span><span class="mv">${v}</span></div>`;}
-function closeMod(){ document.getElementById('mover').classList.remove('on'); }
+function closeMod(){ document.getElementById('mover').classList.remove('on'); currentModalIdx=-1; }
+function showModal(n,i){
+  currentModalIdx=i;
+  document.getElementById('mbody').innerHTML=
+    mr('Data/Hora',n.time||'—')+mr('Motorista',n.motorista||'—')+mr('Placa',n.placa||'—')+
+    mr('NF',n.nfNumero||'—')+mr('Valor NF',fmt(n.nfValor))+
+    mr('Pgto',n.pagamentoNaEntrega||'—')+
+    (n.pagamentoNaEntrega==='Sim'?mr('Tipo',n.tipoPagamento||'—'):'')+
+    (n.pagamentoNaEntrega==='Sim'?mr('Recebido',fmt(n.valorRecebido)):'')+
+    mr('Status',pill(n.status));
+  document.getElementById('mbtn-del').style.display=i>=0?'block':'none';
+  document.getElementById('mover').classList.add('on');
+}
 
-// ─ UTILS ──────────────────────────────────────────────────
+// ─ CADASTROS ─────────────────────────────────────────────────
+let motoristas=JSON.parse(localStorage.getItem('sj_motoristas')||'null')||['Rogério','Roni','Alexander','Rafael','Jefferson'];
+let placas=JSON.parse(localStorage.getItem('sj_placas')||'null')||['FGO-9L43','BZK-9D83','GIN-0H89','OTZ-1H59','FFG-5A41'];
+function saveCadLocal(){ localStorage.setItem('sj_motoristas',JSON.stringify(motoristas)); localStorage.setItem('sj_placas',JSON.stringify(placas)); }
+function loadCadastros(){ renderMotoristas(); renderPlacas(); syncCadFromSheets(); }
+function renderMotoristas(){
+  document.getElementById('mot-count').textContent=motoristas.length;
+  const el=document.getElementById('mot-list');
+  if(!motoristas.length){el.innerHTML='<div class="cad-empty">Nenhum motorista cadastrado</div>';return;}
+  el.innerHTML=motoristas.map((m,i)=>`<div class="cad-item"><span class="cad-ico">🧑‍✈️</span><div style="flex:1"><div class="cad-name">${m}</div><div class="cad-meta">${contarEntregas(m,'mot')} entrega(s)</div></div><button class="cad-del" onclick="delMotorista(${i})">🗑</button></div>`).join('');
+}
+function renderPlacas(){
+  document.getElementById('plc-count').textContent=placas.length;
+  const el=document.getElementById('plc-list');
+  if(!placas.length){el.innerHTML='<div class="cad-empty">Nenhuma placa cadastrada</div>';return;}
+  el.innerHTML=placas.map((p,i)=>`<div class="cad-item"><span class="cad-ico">🚛</span><div style="flex:1"><div class="cad-name">${p}</div><div class="cad-meta">${contarEntregas(p,'plc')} entrega(s)</div></div><button class="cad-del" onclick="delPlaca(${i})">🗑</button></div>`).join('');
+}
+function contarEntregas(val,tipo){ return!allData.length?0:tipo==='mot'?allData.filter(r=>r.motorista===val).length:allData.filter(r=>r.placa===val).length; }
+function addMotorista(){ const inp=document.getElementById('new-mot'),v=inp.value.trim(),errEl=document.getElementById('err-mot'); if(!v){inp.classList.add('inv');errEl.classList.add('on');return;} inp.classList.remove('inv');errEl.classList.remove('on'); if(motoristas.map(m=>m.toLowerCase()).includes(v.toLowerCase())){inp.classList.add('inv');errEl.textContent='Já cadastrado';errEl.classList.add('on');return;} errEl.textContent='Informe o nome'; motoristas.push(v); saveCadLocal(); renderMotoristas(); syncCadToSheets('motoristas'); inp.value=''; showToast('✅ Motorista adicionado',v,'ok',3000); }
+function delMotorista(i){ const nome=motoristas[i],n=contarEntregas(nome,'mot'); if(!confirm(`Excluir "${nome}"?${n?`\n⚠️ ${n} entrega(s) registrada(s).`:''}` ))return; motoristas.splice(i,1); saveCadLocal(); renderMotoristas(); syncCadToSheets('motoristas'); showToast('🗑 Removido',nome,'warn',3000); }
+function addPlaca(){ const inp=document.getElementById('new-plc'),v=inp.value.trim().toUpperCase(),errEl=document.getElementById('err-plc'); if(!v){inp.classList.add('inv');errEl.classList.add('on');return;} inp.classList.remove('inv');errEl.classList.remove('on'); if(placas.includes(v)){inp.classList.add('inv');errEl.textContent='Já cadastrada';errEl.classList.add('on');return;} errEl.textContent='Informe a placa'; placas.push(v); saveCadLocal(); renderPlacas(); syncCadToSheets('placas'); inp.value=''; showToast('✅ Placa adicionada',v,'ok',3000); }
+function delPlaca(i){ const p=placas[i],n=contarEntregas(p,'plc'); if(!confirm(`Excluir "${p}"?${n?`\n⚠️ ${n} entrega(s).`:''}` ))return; placas.splice(i,1); saveCadLocal(); renderPlacas(); syncCadToSheets('placas'); showToast('🗑 Removida',p,'warn',3000); }
+function setSyncStatus(tipo,state,label){ const dot=document.getElementById(tipo+'-sync-dot'),lbl=document.getElementById(tipo+'-sync-lbl'); if(!dot)return; dot.className='cad-sync-dot '+state; lbl.textContent=label; }
+async function syncCadToSheets(tipo){
+  if(SCRIPT_URL==='SUA_URL_AQUI')return;
+  setSyncStatus(tipo==='motoristas'?'mot':'plc','loading','Salvando...');
+  try{ const r=await fetch(SCRIPT_URL,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify({acao:'salvarCadastros',tipo,motoristas,placas})}); const res=JSON.parse(await r.text()); const k=tipo==='motoristas'?'mot':'plc'; if(res.ok){setSyncStatus(k,'ok','Sincronizado ✓ '+new Date().toLocaleTimeString('pt-BR'));}else{setSyncStatus(k,'err','Erro: '+(res.msg||''));} }catch(e){ setSyncStatus(tipo==='motoristas'?'mot':'plc','err','Erro — dados locais'); }
+}
+async function syncCadFromSheets(){
+  if(SCRIPT_URL==='SUA_URL_AQUI'){setSyncStatus('mot','ok','Dados locais');setSyncStatus('plc','ok','Dados locais');return;}
+  setSyncStatus('mot','loading','Carregando...');setSyncStatus('plc','loading','Carregando...');
+  try{ const r=await fetch(SCRIPT_URL+'?acao=listarCadastros'); const res=JSON.parse(await r.text()); if(res.ok){ if(res.motoristas&&res.motoristas.length){motoristas=res.motoristas;saveCadLocal();renderMotoristas();} if(res.placas&&res.placas.length){placas=res.placas;saveCadLocal();renderPlacas();} setSyncStatus('mot','ok','Sincronizado ✓ '+new Date().toLocaleTimeString('pt-BR')); setSyncStatus('plc','ok','Sincronizado ✓ '+new Date().toLocaleTimeString('pt-BR')); }else{setSyncStatus('mot','err','Dados locais');setSyncStatus('plc','err','Dados locais');} }catch(e){setSyncStatus('mot','err','Dados locais');setSyncStatus('plc','err','Dados locais');}
+}
+function syncFiltroMotoristas(){ const sel=document.getElementById('f-mot'); if(!sel)return; const cur=sel.value; sel.innerHTML='<option value="">Todos</option>'+motoristas.map(m=>`<option${m===cur?' selected':''}>${m}</option>`).join(''); }
+
+// ─ UTILS ─────────────────────────────────────────────────────
 function showLoad(m){ document.getElementById('lmsg').textContent=m||'Carregando...'; document.getElementById('loader').classList.add('on'); }
 function hideLoad(){ document.getElementById('loader').classList.remove('on'); }
-
-// ─ CADASTROS ──────────────────────────────────────────────
-// Estado em memória — sincronizado com localStorage e Sheets
-let motoristas = JSON.parse(localStorage.getItem('sj_motoristas') || 'null') ||
-  ['Rogério','Roni','Alexander','Rafael','Jefferson'];
-let placas = JSON.parse(localStorage.getItem('sj_placas') || 'null') ||
-  ['FGO-9L43','BZK-9D83','GIN-0H89','OTZ-1H59','FFG-5A41'];
-
-function saveCadLocal(){
-  localStorage.setItem('sj_motoristas', JSON.stringify(motoristas));
-  localStorage.setItem('sj_placas', JSON.stringify(placas));
-}
-
-function loadCadastros(){
-  renderMotoristas();
-  renderPlacas();
-  syncCadFromSheets();
-}
-
-// Renderiza lista de motoristas
-function renderMotoristas(){
-  document.getElementById('mot-count').textContent = motoristas.length;
-  const el = document.getElementById('mot-list');
-  if(!motoristas.length){
-    el.innerHTML = '<div class="cad-empty">Nenhum motorista cadastrado</div>';
-    return;
-  }
-  el.innerHTML = motoristas.map((m,i) => `
-    <div class="cad-item">
-      <span class="cad-ico">🧑‍✈️</span>
-      <div style="flex:1">
-        <div class="cad-name">${m}</div>
-        <div class="cad-meta">${contarEntregas(m,'mot')} entrega(s) registrada(s)</div>
-      </div>
-      <button class="cad-del" onclick="delMotorista(${i})" title="Excluir">🗑</button>
-    </div>`).join('');
-}
-
-// Renderiza lista de placas
-function renderPlacas(){
-  document.getElementById('plc-count').textContent = placas.length;
-  const el = document.getElementById('plc-list');
-  if(!placas.length){
-    el.innerHTML = '<div class="cad-empty">Nenhuma placa cadastrada</div>';
-    return;
-  }
-  el.innerHTML = placas.map((p,i) => `
-    <div class="cad-item">
-      <span class="cad-ico">🚛</span>
-      <div style="flex:1">
-        <div class="cad-name">${p}</div>
-        <div class="cad-meta">${contarEntregas(p,'plc')} entrega(s) registrada(s)</div>
-      </div>
-      <button class="cad-del" onclick="delPlaca(${i})" title="Excluir">🗑</button>
-    </div>`).join('');
-}
-
-// Conta entregas por motorista ou placa (usa allData já carregado)
-function contarEntregas(val, tipo){
-  if(!allData.length) return 0;
-  return tipo==='mot'
-    ? allData.filter(r=>r.motorista===val).length
-    : allData.filter(r=>r.placa===val).length;
-}
-
-// Adicionar motorista
-function addMotorista(){
-  const inp = document.getElementById('new-mot');
-  const v = inp.value.trim();
-  const errEl = document.getElementById('err-mot');
-  if(!v){ inp.classList.add('inv'); errEl.classList.add('on'); return; }
-  inp.classList.remove('inv'); errEl.classList.remove('on');
-  if(motoristas.map(m=>m.toLowerCase()).includes(v.toLowerCase())){
-    inp.classList.add('inv');
-    errEl.textContent = 'Este motorista já está cadastrado';
-    errEl.classList.add('on'); return;
-  }
-  errEl.textContent = 'Informe o nome do motorista';
-  motoristas.push(v);
-  saveCadLocal();
-  renderMotoristas();
-  syncCadToSheets('motoristas');
-  inp.value = '';
-  inp.focus();
-  showToast('✅ Motorista adicionado', v + ' cadastrado com sucesso', 'ok', 3000);
-}
-
-// Excluir motorista
-function delMotorista(i){
-  const nome = motoristas[i];
-  const entregas = contarEntregas(nome, 'mot');
-  const aviso = entregas > 0
-    ? `\n\n⚠️ Atenção: ${entregas} entrega(s) registradas para este motorista não serão excluídas.`
-    : '';
-  if(!confirm(`Excluir o motorista "${nome}"?${aviso}`)) return;
-  motoristas.splice(i, 1);
-  saveCadLocal();
-  renderMotoristas();
-  syncCadToSheets('motoristas');
-  showToast('🗑 Motorista removido', nome + ' foi excluído do cadastro', 'warn', 3000);
-}
-
-// Adicionar placa
-function addPlaca(){
-  const inp = document.getElementById('new-plc');
-  const v = inp.value.trim().toUpperCase();
-  const errEl = document.getElementById('err-plc');
-  if(!v){ inp.classList.add('inv'); errEl.classList.add('on'); return; }
-  inp.classList.remove('inv'); errEl.classList.remove('on');
-  if(placas.includes(v)){
-    inp.classList.add('inv');
-    errEl.textContent = 'Esta placa já está cadastrada';
-    errEl.classList.add('on'); return;
-  }
-  errEl.textContent = 'Informe a placa do veículo';
-  placas.push(v);
-  saveCadLocal();
-  renderPlacas();
-  syncCadToSheets('placas');
-  inp.value = '';
-  inp.focus();
-  showToast('✅ Placa adicionada', v + ' cadastrada com sucesso', 'ok', 3000);
-}
-
-// Excluir placa
-function delPlaca(i){
-  const placa = placas[i];
-  const entregas = contarEntregas(placa, 'plc');
-  const aviso = entregas > 0
-    ? `\n\n⚠️ Atenção: ${entregas} entrega(s) com esta placa não serão excluídas.`
-    : '';
-  if(!confirm(`Excluir a placa "${placa}"?${aviso}`)) return;
-  placas.splice(i, 1);
-  saveCadLocal();
-  renderPlacas();
-  syncCadToSheets('placas');
-  showToast('🗑 Placa removida', placa + ' foi excluída do cadastro', 'warn', 3000);
-}
-
-// ─ SINCRONIZAÇÃO COM SHEETS ──────────────────────────────
-function setSyncStatus(tipo, state, label){
-  const dot = document.getElementById(tipo+'-sync-dot');
-  const lbl = document.getElementById(tipo+'-sync-lbl');
-  if(!dot) return;
-  dot.className = 'cad-sync-dot ' + state;
-  lbl.textContent = label;
-}
-
-async function syncCadToSheets(tipo){
-  if(SCRIPT_URL === 'SUA_URL_AQUI') return;
-  setSyncStatus(tipo==='motoristas'?'mot':'plc', 'loading', 'Salvando na planilha...');
-  try{
-    const payload = { acao: 'salvarCadastros', tipo, motoristas, placas };
-    const r = await fetch(SCRIPT_URL, {
-      method: 'POST',
-      headers: {'Content-Type':'text/plain'},
-      body: JSON.stringify(payload)
-    });
-    const txt = await r.text();
-    const res = JSON.parse(txt);
-    const key = tipo==='motoristas'?'mot':'plc';
-    if(res.ok){
-      setSyncStatus(key, 'ok', 'Sincronizado com Sheets ✓ ' + new Date().toLocaleTimeString('pt-BR'));
-    } else {
-      setSyncStatus(key, 'err', 'Erro ao sincronizar: ' + (res.msg||''));
-    }
-  } catch(e){
-    const key = tipo==='motoristas'?'mot':'plc';
-    setSyncStatus(key, 'err', 'Erro de conexão — dados salvos localmente');
-  }
-}
-
-async function syncCadFromSheets(){
-  if(SCRIPT_URL === 'SUA_URL_AQUI'){
-    setSyncStatus('mot','ok','Usando dados locais');
-    setSyncStatus('plc','ok','Usando dados locais');
-    return;
-  }
-  setSyncStatus('mot','loading','Carregando da planilha...');
-  setSyncStatus('plc','loading','Carregando da planilha...');
-  try{
-    const r = await fetch(SCRIPT_URL + '?acao=listarCadastros');
-    const txt = await r.text();
-    const res = JSON.parse(txt);
-    if(res.ok){
-      if(res.motoristas && res.motoristas.length){
-        motoristas = res.motoristas;
-        saveCadLocal();
-        renderMotoristas();
-      }
-      if(res.placas && res.placas.length){
-        placas = res.placas;
-        saveCadLocal();
-        renderPlacas();
-      }
-      setSyncStatus('mot','ok','Sincronizado ✓ ' + new Date().toLocaleTimeString('pt-BR'));
-      setSyncStatus('plc','ok','Sincronizado ✓ ' + new Date().toLocaleTimeString('pt-BR'));
-    } else {
-      setSyncStatus('mot','err','Usando dados locais');
-      setSyncStatus('plc','err','Usando dados locais');
-    }
-  } catch(e){
-    setSyncStatus('mot','err','Usando dados locais');
-    setSyncStatus('plc','err','Usando dados locais');
-  }
-}
-
-// Atualiza o filtro de motoristas na aba Entregas
-function syncFiltroMotoristas(){
-  const sel = document.getElementById('f-mot');
-  if(!sel) return;
-  const cur = sel.value;
-  sel.innerHTML = '<option value="">Todos</option>' +
-    motoristas.map(m=>`<option${m===cur?' selected':''}>${m}</option>`).join('');
-}
-
-// Override renderTable p/ atualizar filtro tbm
-const _origRenderTable = renderTable;
 
 // Init
 document.getElementById('app').style.display='none';
 updateBadge();
+renderHistorico();
 </script>
 </body>
 </html>
