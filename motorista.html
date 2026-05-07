@@ -129,6 +129,41 @@ select option{background:#1a1a1a}
   letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all .2s}
 .btn-nova:active{background:var(--ora);color:#fff}
 
+/* VALOR POR TIPO */
+.tipo-valor-wrap{
+  margin-top:12px;display:flex;flex-direction:column;gap:10px;
+}
+.tipo-valor-item{
+  background:var(--surf2);border:1px solid var(--bdr);border-radius:var(--r);
+  padding:12px 14px;display:flex;align-items:center;gap:12px;
+  animation:fadeIn .2s ease;
+}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+.tipo-valor-item .tvi-label{
+  display:flex;align-items:center;gap:6px;
+  font-size:13px;font-weight:700;color:var(--txt);
+  min-width:110px;flex-shrink:0;
+}
+.tipo-valor-item .tvi-label .tvi-ic{font-size:18px}
+.tipo-valor-item input{
+  flex:1;background:var(--bg);border:1.5px solid var(--bdr);
+  border-radius:8px;color:var(--txt);font-family:'Roboto',sans-serif;
+  font-size:16px;padding:10px 12px;outline:none;
+  transition:border-color .2s;margin:0;width:auto;
+}
+.tipo-valor-item input:focus{border-color:var(--ora);box-shadow:0 0 0 3px var(--ora2)}
+.tipo-valor-item input.inv{border-color:var(--err)!important}
+
+/* TOTAL RECEBIDO */
+.total-recebido{
+  background:rgba(232,98,26,.08);border:1px solid rgba(232,98,26,.25);
+  border-radius:var(--r);padding:12px 16px;
+  display:flex;align-items:center;justify-content:space-between;
+  margin-top:4px;
+}
+.total-recebido .tr-label{font-size:12px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--txt2)}
+.total-recebido .tr-val{font-family:'Roboto Condensed',sans-serif;font-size:20px;font-weight:700;color:var(--ora)}
+
 /* ERRO ENVIO */
 .send-err{display:none;background:rgba(224,85,85,.1);border:1px solid rgba(224,85,85,.4);
   border-radius:var(--r);padding:14px;margin-top:14px;font-size:13px;color:var(--err);line-height:1.6}
@@ -223,27 +258,32 @@ select option{background:#1a1a1a}
       <div class="fld">
         <label>Tipo de Pagamento <span class="req">*</span> <span style="font-size:10px;color:var(--txt2);font-weight:400;text-transform:none;letter-spacing:0">(pode marcar mais de um)</span></label>
         <div class="tp">
-          <div class="tp-c"><input type="checkbox" name="tipo" id="t-d" value="Dinheiro">
+          <div class="tp-c"><input type="checkbox" name="tipo" id="t-d" value="Dinheiro" onchange="atualizarValoresTipo()">
             <label for="t-d"><span class="ic">💵</span>Dinheiro</label></div>
-          <div class="tp-c"><input type="checkbox" name="tipo" id="t-pix" value="PIX">
+          <div class="tp-c"><input type="checkbox" name="tipo" id="t-pix" value="PIX" onchange="atualizarValoresTipo()">
             <label for="t-pix"><span class="ic">⚡</span>PIX</label></div>
-          <div class="tp-c"><input type="checkbox" name="tipo" id="t-c" value="Cheque">
+          <div class="tp-c"><input type="checkbox" name="tipo" id="t-c" value="Cheque" onchange="atualizarValoresTipo()">
             <label for="t-c"><span class="ic">📄</span>Cheque</label></div>
-          <div class="tp-c"><input type="checkbox" name="tipo" id="t-db" value="Cartão Débito">
-            <label for="t-db"><span class="ic">💳</span>Cartão Débito</label></div>
-          <div class="tp-c"><input type="checkbox" name="tipo" id="t-cr" value="Cartão Crédito">
-            <label for="t-cr"><span class="ic">💳</span>Cartão Crédito</label></div>
-          <div class="tp-c"><input type="checkbox" name="tipo" id="t-bo" value="Boleto">
+          <div class="tp-c"><input type="checkbox" name="tipo" id="t-db" value="Cartão Débito" onchange="atualizarValoresTipo()">
+            <label for="t-db"><span class="ic">💳</span>Débito</label></div>
+          <div class="tp-c"><input type="checkbox" name="tipo" id="t-cr" value="Cartão Crédito" onchange="atualizarValoresTipo()">
+            <label for="t-cr"><span class="ic">💳</span>Crédito</label></div>
+          <div class="tp-c"><input type="checkbox" name="tipo" id="t-bo" value="Boleto" onchange="atualizarValoresTipo()">
             <label for="t-bo"><span class="ic">🏦</span>Boleto</label></div>
         </div>
         <div class="errmsg" id="em-tipo">Selecione ao menos um tipo de pagamento</div>
       </div>
 
-      <div class="fld">
-        <label>Valor Recebido (R$) <span class="req">*</span></label>
-        <input type="number" id="i-rec" placeholder="0,00" min="0" step="0.01" inputmode="decimal">
-        <div class="divbadge" id="divbadge">⚠️ Valor divergente do valor da NF</div>
-        <div class="errmsg" id="em-rec">Informe o valor recebido</div>
+      <!-- CAMPOS DE VALOR POR TIPO — aparecem dinamicamente -->
+      <div class="fld" id="fld-valores-tipo" style="display:none">
+        <label>Valor por tipo de pagamento <span class="req">*</span></label>
+        <div class="tipo-valor-wrap" id="tipo-valor-wrap"></div>
+        <div class="total-recebido" id="total-recebido-box" style="display:none">
+          <span class="tr-label">Total recebido</span>
+          <span class="tr-val" id="total-recebido-val">R$ 0,00</span>
+        </div>
+        <div class="divbadge" id="divbadge">⚠️ Total divergente do valor da NF</div>
+        <div class="errmsg" id="em-rec">Informe o valor de cada tipo de pagamento</div>
       </div>
 
       <div class="fld">
@@ -367,11 +407,72 @@ document.querySelectorAll('input[name="pgto"]').forEach(r=>{
 });
 
 // Divergência
-document.getElementById('i-rec').addEventListener('input',()=>{
-  const nf=parseFloat(document.getElementById('i-nfv').value)||0;
-  const rc=parseFloat(document.getElementById('i-rec').value)||0;
-  document.getElementById('divbadge').classList.toggle('show', rc>0&&nf>0&&Math.abs(rc-nf)>0.01);
-});
+// Tipos de pagamento com ícones e labels
+const TIPOS_INFO = {
+  'Dinheiro':      {ic:'💵', label:'Dinheiro'},
+  'PIX':           {ic:'⚡', label:'PIX'},
+  'Cheque':        {ic:'📄', label:'Cheque'},
+  'Cartão Débito': {ic:'💳', label:'Débito'},
+  'Cartão Crédito':{ic:'💳', label:'Crédito'},
+  'Boleto':        {ic:'🏦', label:'Boleto'},
+};
+
+function atualizarValoresTipo(){
+  const selecionados = [...document.querySelectorAll('input[name="tipo"]:checked')].map(x=>x.value);
+  const wrap = document.getElementById('tipo-valor-wrap');
+  const fld  = document.getElementById('fld-valores-tipo');
+  const totBox = document.getElementById('total-recebido-box');
+
+  document.getElementById('em-tipo').classList.remove('on');
+
+  if(selecionados.length === 0){
+    fld.style.display = 'none';
+    totBox.style.display = 'none';
+    wrap.innerHTML = '';
+    return;
+  }
+
+  fld.style.display = 'block';
+
+  // Mantém valores já preenchidos ao adicionar/remover tipos
+  const valoresAtual = {};
+  wrap.querySelectorAll('input[data-tipo]').forEach(inp => {
+    valoresAtual[inp.dataset.tipo] = inp.value;
+  });
+
+  wrap.innerHTML = selecionados.map(tipo => {
+    const info = TIPOS_INFO[tipo] || {ic:'💰', label:tipo};
+    const valAnterior = valoresAtual[tipo] || '';
+    return '<div class="tipo-valor-item">'
+      + '<div class="tvi-label"><span class="tvi-ic">' + info.ic + '</span>' + info.label + '</div>'
+      + '<input type="number" data-tipo="' + tipo + '" placeholder="0,00" '
+      + 'min="0" step="0.01" inputmode="decimal" value="' + valAnterior + '" '
+      + 'oninput="calcularTotal()" '
+      + 'onchange="calcularTotal()">'
+      + '</div>';
+  }).join('');
+
+  // Mostra o total só se mais de 1 tipo
+  totBox.style.display = selecionados.length > 1 ? 'flex' : 'none';
+  calcularTotal();
+}
+
+function calcularTotal(){
+  const nfv = parseFloat(document.getElementById('i-nfv').value) || 0;
+  let total = 0;
+  document.querySelectorAll('#tipo-valor-wrap input[data-tipo]').forEach(inp => {
+    total += parseFloat(inp.value) || 0;
+  });
+
+  // Atualiza total
+  document.getElementById('total-recebido-val').textContent =
+    'R$ ' + total.toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2});
+
+  // Badge de divergência
+  document.getElementById('divbadge').classList.toggle(
+    'show', total > 0 && nfv > 0 && Math.abs(total - nfv) > 0.01
+  );
+}
 
 // Upload preview
 document.getElementById('foto').addEventListener('change',function(){
@@ -409,11 +510,19 @@ function validate(){
     const tps=[...document.querySelectorAll('input[name="tipo"]:checked')];
     document.getElementById('em-tipo').classList.toggle('on',tps.length===0);
     if(tps.length===0)ok=false;
-    const rec=document.getElementById('i-rec');
-    const rv=rec.value.trim();
-    rec.classList.toggle('inv',!rv);
-    document.getElementById('em-rec').classList.toggle('on',!rv);
-    if(!rv)ok=false;
+    // Validar valor de cada tipo selecionado
+    const camposTipo = [...document.querySelectorAll('#tipo-valor-wrap input[data-tipo]')];
+    let todosTiposOk = true;
+    camposTipo.forEach(inp => {
+      if(!inp.value || parseFloat(inp.value) <= 0){
+        inp.classList.add('inv');
+        todosTiposOk = false;
+      } else {
+        inp.classList.remove('inv');
+      }
+    });
+    document.getElementById('em-rec').classList.toggle('on', !todosTiposOk || camposTipo.length===0);
+    if(!todosTiposOk || camposTipo.length===0) ok=false;
     const foto=document.getElementById('foto').files[0];
     document.getElementById('em-foto').classList.toggle('on',!foto);
     if(!foto)ok=false;
@@ -444,9 +553,20 @@ document.getElementById('form').addEventListener('submit',async function(e){
 
   const pg=document.querySelector('input[name="pgto"]:checked').value;
   const nfv=parseFloat(document.getElementById('i-nfv').value)||0;
-  const rcv=parseFloat(document.getElementById('i-rec').value)||0;
-  const tipo=[...document.querySelectorAll('input[name="tipo"]:checked')].map(x=>x.value).join(', ');
   const oco=document.getElementById('i-oco').value.trim();
+
+  // Coleta tipo e valor de cada método de pagamento
+  const tipoValores = {};
+  document.querySelectorAll('#tipo-valor-wrap input[data-tipo]').forEach(inp => {
+    tipoValores[inp.dataset.tipo] = parseFloat(inp.value) || 0;
+  });
+  const tipo = Object.keys(tipoValores).join(', ');
+  const rcv  = Object.values(tipoValores).reduce((a,b)=>a+b, 0);
+
+  // Detalhe formatado: "PIX: R$100,00 | Dinheiro: R$50,00"
+  const tipoDetalhe = Object.entries(tipoValores)
+    .map(([k,v]) => k+': R$'+v.toLocaleString('pt-BR',{minimumFractionDigits:2}))
+    .join(' | ');
 
   let status='Normal';
   const flags=[];
@@ -474,6 +594,7 @@ document.getElementById('form').addEventListener('submit',async function(e){
     nfValor:nfv,
     pagamentoNaEntrega:pg,
     tipoPagamento:tipo,
+    tipoDetalhe:tipoDetalhe,
     valorRecebido:rcv,
     ocorrencia:oco,
     status:status,
@@ -496,13 +617,17 @@ document.getElementById('form').addEventListener('submit',async function(e){
     document.getElementById('loading').classList.remove('on');
 
     if(result.ok){
-      document.getElementById('smeta').innerHTML=`
-        <div class="row"><span>Motorista</span><span>${payload.motorista}</span></div>
-        <div class="row"><span>Placa</span><span>${payload.placa}</span></div>
-        <div class="row"><span>NF</span><span>${payload.nfNumero}</span></div>
-        <div class="row"><span>Valor NF</span><span>R$ ${nfv.toFixed(2).replace('.',',')}</span></div>
-        <div class="row"><span>Status</span><span style="color:${status==='Normal'?'var(--ok)':'var(--err)'}">${status}</span></div>
-      `;
+      const recFmt = rcv.toLocaleString('pt-BR',{minimumFractionDigits:2});
+      const nfFmt  = nfv.toLocaleString('pt-BR',{minimumFractionDigits:2});
+      const detalheRow = tipoDetalhe ? '<div class="row"><span>Recebido por tipo</span><span style="font-size:11px;text-align:right;max-width:180px;line-height:1.6">'+tipoDetalhe+'</span></div>' : '';
+      document.getElementById('smeta').innerHTML=
+        '<div class="row"><span>Motorista</span><span>'+payload.motorista+'</span></div>'+
+        '<div class="row"><span>Placa</span><span>'+payload.placa+'</span></div>'+
+        '<div class="row"><span>NF</span><span>'+payload.nfNumero+'</span></div>'+
+        '<div class="row"><span>Valor NF</span><span>R$ '+nfFmt+'</span></div>'+
+        detalheRow+
+        '<div class="row"><span>Total recebido</span><span>R$ '+recFmt+'</span></div>'+
+        '<div class="row"><span>Status</span><span style="color:'+(status==='Normal'?'var(--ok)':'var(--err)')+'">'+status+'</span></div>';
       document.getElementById('main').style.display='none';
       document.getElementById('succ').classList.add('on');
     }else{
@@ -526,6 +651,9 @@ function nova(){
   document.getElementById('uparea').classList.remove('got');
   document.getElementById('divbadge').classList.remove('show');
   document.getElementById('send-err').classList.remove('show');
+  document.getElementById('tipo-valor-wrap').innerHTML='';
+  document.getElementById('fld-valores-tipo').style.display='none';
+  document.getElementById('total-recebido-box').style.display='none';
   document.getElementById('prog').style.width='10%';
   document.getElementById('main').style.display='block';
   document.getElementById('succ').classList.remove('on');
