@@ -188,10 +188,36 @@ tbody td{padding:11px 14px;vertical-align:middle;white-space:nowrap}
 .mrow .mk{color:var(--txt2);font-size:11px;letter-spacing:.5px;text-transform:uppercase;font-weight:700;white-space:nowrap;padding-top:1px}
 .mrow .mv{color:var(--txt);font-weight:500;text-align:right}
 .mimg{width:100%;max-height:240px;object-fit:contain;border-radius:8px;margin-top:12px;border:1px solid var(--bdr)}
-.modal-footer{display:flex;justify-content:flex-end;gap:10px;margin-top:20px;padding-top:16px;border-top:1px solid var(--bdr)}
+.modal-footer{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:20px;padding-top:16px;border-top:1px solid var(--bdr);flex-wrap:wrap}
+.modal-footer-left{display:flex;gap:8px}
+.modal-footer-right{display:flex;gap:8px}
 .mbtn-del{padding:10px 20px;background:rgba(224,85,85,.1);color:var(--err);border:1px solid rgba(224,85,85,.3);border-radius:8px;font-family:'Roboto Condensed',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s}
 .mbtn-del:hover{background:rgba(224,85,85,.2)}
 .mbtn-close{padding:10px 20px;background:var(--surf2);color:var(--txt2);border:1px solid var(--bdr);border-radius:8px;font-family:'Roboto Condensed',sans-serif;font-size:14px;font-weight:700;cursor:pointer}
+.mbtn-edit{padding:10px 20px;background:rgba(74,144,217,.1);color:var(--info);border:1px solid rgba(74,144,217,.3);border-radius:8px;font-family:'Roboto Condensed',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s}
+.mbtn-edit:hover{background:rgba(74,144,217,.2)}
+.mbtn-save{padding:10px 20px;background:var(--ora);color:#fff;border:none;border-radius:8px;font-family:'Roboto Condensed',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:opacity .2s}
+.mbtn-save:active{opacity:.85}
+.mbtn-cancel{padding:10px 16px;background:transparent;color:var(--txt2);border:1px solid var(--bdr);border-radius:8px;font-family:'Roboto Condensed',sans-serif;font-size:14px;font-weight:700;cursor:pointer}
+
+/* Modo edição no modal */
+.medit-row{display:flex;flex-direction:column;gap:4px;padding:8px 0;border-bottom:1px solid var(--bdr)}
+.medit-row:last-child{border-bottom:none}
+.medit-label{font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--txt2)}
+.medit-row input,.medit-row select,.medit-row textarea{
+  background:var(--surf2);border:1.5px solid var(--bdr);border-radius:8px;
+  color:var(--txt);font-family:'Roboto',sans-serif;font-size:14px;
+  padding:9px 12px;outline:none;transition:border-color .2s;width:100%;
+  -webkit-appearance:none;appearance:none;
+}
+.medit-row input:focus,.medit-row select:focus,.medit-row textarea:focus{border-color:var(--ora);box-shadow:0 0 0 3px var(--ora2)}
+.medit-row textarea{resize:none;height:70px;line-height:1.5}
+.medit-row select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:34px}
+.medit-row select option{background:#222}
+.medit-saving{text-align:center;padding:10px;font-size:13px;color:var(--txt2);display:none}
+.medit-saving.show{display:block}
+.medit-err{font-size:12px;color:var(--err);margin-top:6px;display:none}
+.medit-err.show{display:block}
 
 /* ── LOADER ── */
 .loader{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:400;flex-direction:column;align-items:center;justify-content:center;gap:12px}
@@ -549,11 +575,23 @@ tbody td{padding:11px 14px;vertical-align:middle;white-space:nowrap}
 <!-- MODAL -->
 <div class="mover" id="mover" onclick="if(event.target===this)closeMod()">
   <div class="modal">
-    <div class="mhdr"><h3>Detalhe da Entrega</h3><button class="mclose" onclick="closeMod()">✕</button></div>
+    <div class="mhdr">
+      <h3 id="modal-title">Detalhe da Entrega</h3>
+      <button class="mclose" onclick="closeMod()">✕</button>
+    </div>
     <div id="mbody"></div>
+    <div class="medit-saving" id="medit-saving">⏳ Salvando alterações...</div>
+    <div class="medit-err" id="medit-err"></div>
     <div class="modal-footer">
-      <button class="mbtn-del" id="mbtn-del" onclick="excluirEntregaAtual()">🗑 Excluir esta entrega</button>
-      <button class="mbtn-close" onclick="closeMod()">Fechar</button>
+      <div class="modal-footer-left">
+        <button class="mbtn-del" id="mbtn-del" onclick="excluirEntregaAtual()">🗑 Excluir</button>
+      </div>
+      <div class="modal-footer-right">
+        <button class="mbtn-edit" id="mbtn-edit" onclick="entrarModoEdicao()">✏️ Editar</button>
+        <button class="mbtn-save" id="mbtn-save" onclick="salvarEdicao()" style="display:none">💾 Salvar</button>
+        <button class="mbtn-cancel" id="mbtn-cancel" onclick="cancelarEdicao()" style="display:none">Cancelar</button>
+        <button class="mbtn-close" id="mbtn-close" onclick="closeMod()">Fechar</button>
+      </div>
     </div>
   </div>
 </div>
@@ -988,30 +1026,224 @@ function applyFil(){
 function clearFil(){ ['f-di','f-df'].forEach(id=>document.getElementById(id).value=''); ['f-mot','f-sta'].forEach(id=>document.getElementById(id).value=''); filtData=[...allData]; renderTable(filtData); }
 
 // ─ MODAL ─────────────────────────────────────────────────────
+let modoEdicao = false;
+
 function openMod(i){
   const r=filtData[i]; if(!r)return;
   currentModalIdx=i;
-  const imgHtml=r.fotoUrl?`<img class="mimg" src="${r.fotoUrl}" alt="Comprovante">`:'';
-  document.getElementById('mbody').innerHTML=
-    mr('Data/Hora',r.data||'—')+mr('Motorista',r.motorista||'—')+mr('Placa',r.placa||'—')+
-    mr('NF Número',r.nfNumero||'—')+mr('Valor NF',fmt(r.nfValor))+
-    mr('Pgto na Entrega',r.pagamentoNaEntrega||'—')+
-    (r.pagamentoNaEntrega==='Sim'?mr('Tipo Pagamento',r.tipoPagamento||'—'):'')+
-    (r.pagamentoNaEntrega==='Sim'?mr('Valor Recebido',fmt(r.valorRecebido)):'')+
-    mr('Status',pill(r.status))+(r.ocorrencia?mr('Ocorrência',r.ocorrencia):'')+imgHtml;
+  modoEdicao=false;
+  renderModalView(r);
+  document.getElementById('modal-title').textContent='Detalhe da Entrega';
+  document.getElementById('mbtn-edit').style.display='block';
+  document.getElementById('mbtn-save').style.display='none';
+  document.getElementById('mbtn-cancel').style.display='none';
+  document.getElementById('mbtn-close').style.display='block';
+  document.getElementById('mbtn-del').style.display='block';
+  document.getElementById('medit-saving').classList.remove('show');
+  document.getElementById('medit-err').classList.remove('show');
   document.getElementById('mover').classList.add('on');
 }
-function mr(k,v){return`<div class="mrow"><span class="mk">${k}</span><span class="mv">${v}</span></div>`;}
-function closeMod(){ document.getElementById('mover').classList.remove('on'); currentModalIdx=-1; }
+
+function renderModalView(r){
+  const imgHtml=r.fotoUrl
+    ?'<div style="margin-top:12px"><img class="mimg" src="'+r.fotoUrl+'" alt="Comprovante"></div>':''
+  document.getElementById('mbody').innerHTML=
+    mr('Data/Hora',r.data||'—')+
+    mr('Motorista',r.motorista||'—')+
+    mr('Placa',r.placa||'—')+
+    mr('NF Número',r.nfNumero||'—')+
+    mr('Valor NF',fmt(r.nfValor))+
+    mr('Pgto na Entrega',r.pagamentoNaEntrega||'—')+
+    (r.pagamentoNaEntrega==='Sim'?mr('Tipo Pagamento',r.tipoPagamento||'—'):'')+
+    (r.tipoDetalhe?mr('Detalhe',r.tipoDetalhe):'')+
+    (r.pagamentoNaEntrega==='Sim'?mr('Valor Recebido',fmt(r.valorRecebido)):'')+
+    mr('Status',pill(r.status))+
+    (r.ocorrencia?mr('Ocorrência',r.ocorrencia):'')+
+    imgHtml;
+}
+
+function mr(k,v){return'<div class="mrow"><span class="mk">'+k+'</span><span class="mv">'+v+'</span></div>';}
+
+function entrarModoEdicao(){
+  const r=filtData[currentModalIdx]; if(!r)return;
+  modoEdicao=true;
+  document.getElementById('modal-title').textContent='Editar Entrega';
+  document.getElementById('mbtn-edit').style.display='none';
+  document.getElementById('mbtn-save').style.display='block';
+  document.getElementById('mbtn-cancel').style.display='block';
+  document.getElementById('mbtn-close').style.display='none';
+  document.getElementById('mbtn-del').style.display='none';
+
+  const mots=motoristas.length?motoristas:['Rogério','Roni','Alexander','Rafael','Jefferson'];
+  const plcs=placas.length?placas:['FGO-9L43','BZK-9D83','GIN-0H89','OTZ-1H59','FFG-5A41'];
+
+  const motOpts=mots.map(m=>'<option'+(m===r.motorista?' selected':'')+'>'+m+'</option>').join('');
+  const plcOpts=plcs.map(p=>'<option'+(p===r.placa?' selected':'')+'>'+p+'</option>').join('');
+
+  const pgtoSim=r.pagamentoNaEntrega==='Sim';
+
+  document.getElementById('mbody').innerHTML=
+    meditRow('Motorista','<select id="e-mot">'+motOpts+'</select>')+
+    meditRow('Placa','<select id="e-plc">'+plcOpts+'</select>')+
+    meditRow('NF Número','<input type="text" id="e-nfnum" value="'+esc(r.nfNumero)+'" inputmode="numeric">')+
+    meditRow('Valor NF (R$)','<input type="number" id="e-nfval" value="'+(r.nfValor||'')+'" min="0" step="0.01" inputmode="decimal">')+
+    meditRow('Pagamento na Entrega',
+      '<select id="e-pgto" onchange="toggleEditPgto()">'
+      +'<option'+(pgtoSim?'':' selected')+' value="Não">Não</option>'
+      +'<option'+(pgtoSim?' selected':'')+' value="Sim">Sim</option>'
+      +'</select>')+
+    '<div id="e-pgto-extra" style="'+(pgtoSim?'':'display:none')+'">'+
+    meditRow('Tipo Pagamento','<input type="text" id="e-tipo" value="'+esc(r.tipoPagamento||'')+'" placeholder="Ex: PIX, Dinheiro">')+
+    meditRow('Detalhe por Tipo','<input type="text" id="e-detalhe" value="'+esc(r.tipoDetalhe||'')+'" placeholder="Ex: PIX: R$100 | Dinheiro: R$50">')+
+    meditRow('Valor Recebido (R$)','<input type="number" id="e-recval" value="'+(r.valorRecebido||'')+'" min="0" step="0.01" inputmode="decimal">')+
+    '</div>'+
+    meditRow('Ocorrência','<textarea id="e-ocorrencia">'+esc(r.ocorrencia||'')+'</textarea>')+
+    meditRow('Status',
+      '<select id="e-status">'
+      +'<option'+(r.status==='Normal'?' selected':'')+'>Normal</option>'
+      +'<option'+((r.status||'').includes('Divergente')&&!r.status.includes('Ocorrência')?' selected':'')+'>Divergente</option>'
+      +'<option'+((r.status||'').includes('Ocorrência')&&!r.status.includes('Divergente')?' selected':'')+'>Com Ocorrência</option>'
+      +'<option'+((r.status||'').includes('Divergente')&&r.status.includes('Ocorrência')?' selected':'')+' value="Divergente + Com Ocorrência">Divergente + Ocorrência</option>'
+      +'</select>');
+}
+
+function esc(s){ return String(s).replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
+
+function meditRow(label, inputHtml){
+  return '<div class="medit-row"><div class="medit-label">'+label+'</div>'+inputHtml+'</div>';
+}
+
+function toggleEditPgto(){
+  const val=document.getElementById('e-pgto').value;
+  document.getElementById('e-pgto-extra').style.display=val==='Sim'?'block':'none';
+}
+
+function cancelarEdicao(){
+  modoEdicao=false;
+  const r=filtData[currentModalIdx];
+  if(r){ renderModalView(r); }
+  document.getElementById('modal-title').textContent='Detalhe da Entrega';
+  document.getElementById('mbtn-edit').style.display='block';
+  document.getElementById('mbtn-save').style.display='none';
+  document.getElementById('mbtn-cancel').style.display='none';
+  document.getElementById('mbtn-close').style.display='block';
+  document.getElementById('mbtn-del').style.display='block';
+  document.getElementById('medit-err').classList.remove('show');
+}
+
+async function salvarEdicao(){
+  const r=filtData[currentModalIdx]; if(!r)return;
+
+  // Coletar valores
+  const novoMot   = document.getElementById('e-mot').value.trim();
+  const novaPlc   = document.getElementById('e-plc').value.trim();
+  const novoNfNum = document.getElementById('e-nfnum').value.trim();
+  const novoNfVal = parseFloat(document.getElementById('e-nfval').value)||0;
+  const novoPgto  = document.getElementById('e-pgto').value;
+  const novoTipo  = novoPgto==='Sim'?(document.getElementById('e-tipo').value.trim()):'';
+  const novoDetalhe=novoPgto==='Sim'?(document.getElementById('e-detalhe').value.trim()):'';
+  const novoRec   = novoPgto==='Sim'?(parseFloat(document.getElementById('e-recval').value)||0):0;
+  const novaOco   = document.getElementById('e-ocorrencia').value.trim();
+  const novoStatus= document.getElementById('e-status').value;
+
+  // Validação básica
+  const errEl=document.getElementById('medit-err');
+  if(!novoMot||!novaPlc||!novoNfNum){
+    errEl.textContent='Preencha Motorista, Placa e NF Número.';
+    errEl.classList.add('show');
+    return;
+  }
+  errEl.classList.remove('show');
+
+  // Loading
+  document.getElementById('medit-saving').classList.add('show');
+  document.getElementById('mbtn-save').disabled=true;
+
+  const dadosAtualizados={
+    acao:'editarEntrega',
+    // Chave para localizar a linha
+    nfNumeroOriginal: r.nfNumero,
+    motoristaOriginal: r.motorista,
+    dataOriginal: r.dataISO||'',
+    // Novos valores
+    motorista:         novoMot,
+    placa:             novaPlc,
+    nfNumero:          novoNfNum,
+    nfValor:           novoNfVal,
+    pagamentoNaEntrega:novoPgto,
+    tipoPagamento:     novoTipo,
+    tipoDetalhe:       novoDetalhe,
+    valorRecebido:     novoRec,
+    ocorrencia:        novaOco,
+    status:            novoStatus,
+  };
+
+  try{
+    const resp=await fetch(SCRIPT_URL,{
+      method:'POST',
+      headers:{'Content-Type':'text/plain'},
+      body:JSON.stringify(dadosAtualizados)
+    });
+    const res=JSON.parse(await resp.text());
+
+    document.getElementById('medit-saving').classList.remove('show');
+    document.getElementById('mbtn-save').disabled=false;
+
+    if(res.ok){
+      // Atualiza dados locais
+      const idx=allData.findIndex(x=>x.nfNumero===r.nfNumero&&x.motorista===r.motorista&&x.dataISO===r.dataISO);
+      const updated={
+        ...r,
+        motorista:novoMot, placa:novaPlc, nfNumero:novoNfNum,
+        nfValor:novoNfVal, pagamentoNaEntrega:novoPgto,
+        tipoPagamento:novoTipo, tipoDetalhe:novoDetalhe,
+        valorRecebido:novoRec, ocorrencia:novaOco, status:novoStatus
+      };
+      if(idx>=0) allData[idx]=updated;
+      const fi=filtData.findIndex(x=>x.nfNumero===r.nfNumero&&x.motorista===r.motorista&&x.dataISO===r.dataISO);
+      if(fi>=0) filtData[fi]=updated;
+      currentModalIdx=fi>=0?fi:currentModalIdx;
+
+      // Volta para modo visualização com dados novos
+      cancelarEdicao();
+      renderDash(allData);
+      renderTable(filtData);
+      showToast('✅ Entrega atualizada','NF '+novoNfNum+' salva com sucesso','ok',4000);
+    }else{
+      errEl.textContent='Erro ao salvar: '+(res.msg||'Tente novamente');
+      errEl.classList.add('show');
+    }
+  }catch(e){
+    document.getElementById('medit-saving').classList.remove('show');
+    document.getElementById('mbtn-save').disabled=false;
+    errEl.textContent='Erro de conexão: '+e.message;
+    errEl.classList.add('show');
+  }
+}
+
+function closeMod(){
+  document.getElementById('mover').classList.remove('on');
+  currentModalIdx=-1;
+  modoEdicao=false;
+}
+
 function showModal(n,i){
   currentModalIdx=i;
-  document.getElementById('mbody').innerHTML=
-    mr('Data/Hora',n.time||'—')+mr('Motorista',n.motorista||'—')+mr('Placa',n.placa||'—')+
-    mr('NF',n.nfNumero||'—')+mr('Valor NF',fmt(n.nfValor))+
-    mr('Pgto',n.pagamentoNaEntrega||'—')+
-    (n.pagamentoNaEntrega==='Sim'?mr('Tipo',n.tipoPagamento||'—'):'')+
-    (n.pagamentoNaEntrega==='Sim'?mr('Recebido',fmt(n.valorRecebido)):'')+
-    mr('Status',pill(n.status));
+  modoEdicao=false;
+  const r={
+    data:n.time||'—', motorista:n.motorista||'—', placa:n.placa||'—',
+    nfNumero:n.nfNumero||'—', nfValor:n.nfValor||0,
+    pagamentoNaEntrega:n.pagamentoNaEntrega||'—',
+    tipoPagamento:n.tipoPagamento||'—', tipoDetalhe:n.tipoDetalhe||'',
+    valorRecebido:n.valorRecebido||0, status:n.status||'Normal',
+    ocorrencia:n.ocorrencia||'', fotoUrl:''
+  };
+  renderModalView(r);
+  document.getElementById('modal-title').textContent='Detalhe da Entrega';
+  document.getElementById('mbtn-edit').style.display='none';
+  document.getElementById('mbtn-save').style.display='none';
+  document.getElementById('mbtn-cancel').style.display='none';
+  document.getElementById('mbtn-close').style.display='block';
   document.getElementById('mbtn-del').style.display=i>=0?'block':'none';
   document.getElementById('mover').classList.add('on');
 }
